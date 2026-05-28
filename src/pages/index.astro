@@ -1,0 +1,727 @@
+---
+import logoLab from "../../logos/logo_labIA.png";
+import logoChec from "../../logos/checlogo.png";
+import logoUnal from "../../logos/logo_unal_transparente.png";
+import metodologia from "../../resultados/metodolgia.png";
+
+const etapas = [
+  ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
+  ["Actualización Prototipo 1", "Ajuste de librerías, base de datos 2025, RAG, normativa y chatbot inteligente."],
+  ["Simulación contrafactual", "Escenarios tipo que pasa si para reposición, mantenimiento y eventos extremos."],
+  ["Evaluación económica", "Integración de costos de mantenimiento, reposición y retorno de inversión."],
+  ["Resultados del simulador", "Visualización tabular y georreferenciada de impactos esperados."],
+  ["Soporte a decisiones", "Comparación entre estado actual e intervenciones priorizadas."]
+];
+
+const cronograma = [
+  ["Ajustes módulo predictivo y Chatbot", "Actualización librerías y base de datos 2025", "Mes 1"],
+  ["Ajustes módulo predictivo y Chatbot", "Actualización modelo RAG y normativa", "Mes 1 - Mes 2"],
+  ["Simulación contrafactual", "Diseño de arquitectura del simulador", "Mes 1"],
+  ["Simulación contrafactual", "Modelado probabilístico con restricciones físicas", "Mes 2 - Mes 3"],
+  ["Simulación contrafactual", "Escenarios que pasa si, ENS, SAIDI, SAIFI y clima extremo", "Mes 2 - Mes 4"],
+  ["Evaluación económica dinámica", "Costos, retorno de inversión y ranking de intervenciones", "Mes 2 - Mes 4"],
+  ["Visualización y despliegue", "Resultados georreferenciados/tabulares e infraestructura local/nube CHEC", "Mes 1 - Mes 4"],
+  ["Validación final", "Pruebas técnicas y ajuste fino", "Mes 4"]
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Resultados de avance del proyecto Simulador de criticidad CHEC - UNAL."
+    />
+    <title>Simulador Criticidad CHEC | Lab IA UNAL</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Inicio">
+        <img src={logoLab.src} alt="Logo Laboratorio IA UNAL" />
+      </a>
+      <nav aria-label="Navegación principal">
+        <a href="#acta">Acta</a>
+        <a href="#cronograma">Cronograma</a>
+        <a href="#resultados">Resultados</a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">CHEC + Universidad Nacional de Colombia</p>
+          <h1>Simulador de criticidad CHEC</h1>
+          <p class="lead">
+            Avance del proyecto para desarrollar módulos de inteligencia artificial informados por la física,
+            orientados al análisis de criticidad e intervenciones en redes de nivel de tensión 2.
+          </p>
+          <div class="hero-actions" aria-label="Acciones principales">
+            <a class="button primary" href="#acta">Ver secciones</a>
+            <a class="button secondary" href="#resultados">Resultados actuales</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Datos principales del proyecto">
+          <img class="panel-logo" src={logoLab.src} alt="Laboratorio IA UNAL" />
+          <dl>
+            <div>
+              <dt>Contrato</dt>
+              <dd>CRW254513 de 2024</dd>
+            </div>
+            <div>
+              <dt>Acta</dt>
+              <dd>Trabajo número 1</dd>
+            </div>
+            <div>
+              <dt>Duración</dt>
+              <dd>104 días calendario</dd>
+            </div>
+            <div>
+              <dt>Inicio mes 1</dt>
+              <dd>27 de abril de 2026</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="logo-strip" aria-label="Instituciones participantes">
+        <img src={logoChec.src} alt="Logo CHEC" />
+        <img src={logoUnal.src} alt="Logo Universidad Nacional de Colombia" />
+      </section>
+
+      <section id="acta" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Resumen del documento</p>
+          <h2>Secciones 1 a 9 del acta</h2>
+          <p>
+            Síntesis ejecutiva del alcance, metodología, resultados esperados, cronograma y entregables del
+            proyecto.
+          </p>
+        </div>
+
+        <div class="summary-grid">
+          <article>
+            <span>01</span>
+            <h3>Abreviaturas</h3>
+            <p>CHEC: Central Hidroeléctrica de Caldas S.A. E.S.P. UNAL: Universidad Nacional de Colombia sede Manizales.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Objeto</h3>
+            <p>Desarrollar módulos de IA informados por la física y apoyados por agentes para estudiar criticidad y efectividad de intervenciones.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Alcance</h3>
+            <p>Simulación contrafactual para reposición y mantenimiento, estimando SAIDI, SAIFI y costos con incertidumbre y sensibilidad.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Objetivos</h3>
+            <p>Construir módulos predictivo/chatbot, simulación contrafactual con restricciones físicas y evaluación económica dinámica.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Metodología</h3>
+            <p>El trabajo avanza desde entradas de información hasta comparación de escenarios para apoyar decisiones de inversión.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3>Plazo</h3>
+            <p>La ejecución contempla 104 días calendario, con posibilidad de ajustes por acuerdo entre las partes.</p>
+          </article>
+          <article>
+            <span>07</span>
+            <h3>Resultado esperado</h3>
+            <p>Simulador con visualización georreferenciada y tabular, más actualización de arquitectura local/nube CHEC-EPM.</p>
+          </article>
+          <article>
+            <span>08</span>
+            <h3>Cronograma</h3>
+            <p>Plan de cuatro meses que integra predicción, simulación, evaluación económica, despliegue y validación final.</p>
+          </article>
+          <article>
+            <span>09</span>
+            <h3>Entregables</h3>
+            <p>Informe técnico, repositorio GitHub documentado y pruebas piloto en cuadernos de Python.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section tinted">
+        <div class="section-heading compact">
+          <p class="eyebrow">Tabla resumida</p>
+          <h2>Participantes clave</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Entidad / rol</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gustavo Agredo Cardona</td>
+                <td>Representante legal del contratista - UNAL</td>
+              </tr>
+              <tr>
+                <td>Juan Carlos Álvarez Barreto</td>
+                <td>Profesional Subgerencia T&amp;D, gestor técnico</td>
+              </tr>
+              <tr>
+                <td>Luis Alirio Bolaños Navarrete</td>
+                <td>Profesional Subgerencia T&amp;D, gestor técnico</td>
+              </tr>
+              <tr>
+                <td>Iván Darío Cardona Jiménez</td>
+                <td>Profesional Área Gestión Operativa, gestor administrativo</td>
+              </tr>
+              <tr>
+                <td>Andrés Marino Álvarez Meza</td>
+                <td>Director del proyecto por parte de UNAL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Ruta metodológica</p>
+          <h2>Etapas de trabajo</h2>
+        </div>
+        <div class="timeline">
+          {etapas.map(([title, text], index) => (
+            <article>
+              <strong>{String(index + 1).padStart(2, "0")}</strong>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="cronograma" class="section tinted">
+        <div class="section-heading compact">
+          <p class="eyebrow">Tabla resumida</p>
+          <h2>Cronograma de avance</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Módulo / etapa</th>
+                <th>Actividad principal</th>
+                <th>Ventana</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cronograma.map(([modulo, actividad, ventana]) => (
+                <tr>
+                  <td>{modulo}</td>
+                  <td>{actividad}</td>
+                  <td><span class="pill">{ventana}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section deliverables">
+        <div class="section-heading">
+          <p class="eyebrow">Sección 9</p>
+          <h2>Entregables acordados</h2>
+        </div>
+        <div class="deliverable-grid">
+          <article>
+            <h3>Informe técnico</h3>
+            <p>Documento con la descripción de los desarrollos, resultados y decisiones técnicas.</p>
+          </article>
+          <article>
+            <h3>Repositorio GitHub</h3>
+            <p>Código desarrollado y documentado para facilitar trazabilidad y continuidad.</p>
+          </article>
+          <article>
+            <h3>Pruebas piloto</h3>
+            <p>Cuadernos de Python para validar cálculos, procedimientos y actualización de resultados.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="resultados" class="section results">
+        <div class="section-heading">
+          <p class="eyebrow">Resultados actuales</p>
+          <h2>Metodología implementada</h2>
+          <p>
+            Vista actual del flujo de trabajo del simulador de criticidad, integrando datos, agentes,
+            modelado y visualización para la toma de decisiones.
+          </p>
+        </div>
+        <figure>
+          <img src={metodologia.src} alt="Metodología actual del simulador de criticidad CHEC" />
+          <figcaption>Figura de avance: metodología del simulador de criticidad CHEC.</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <footer>
+      <img src={logoLab.src} alt="Laboratorio IA UNAL" />
+      <p>Simulador de criticidad CHEC - Universidad Nacional de Colombia, sede Manizales.</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --ink: #102129;
+    --muted: #5f6f77;
+    --line: #dce7e4;
+    --soft: #f3f8f6;
+    --panel: #ffffff;
+    --green: #007a53;
+    --green-dark: #005c45;
+    --blue: #0b5f8a;
+    --gold: #f4b23a;
+    --shadow: 0 18px 50px rgb(16 33 41 / 10%);
+    color: var(--ink);
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--soft);
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background:
+      linear-gradient(180deg, rgba(243, 248, 246, 0.95), rgba(255, 255, 255, 0.98) 36rem),
+      var(--soft);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem clamp(1rem, 4vw, 4rem);
+    background: rgba(255, 255, 255, 0.88);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+  }
+
+  .brand img {
+    width: 148px;
+    height: 46px;
+    object-fit: contain;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.8rem, 2vw, 1.6rem);
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 700;
+  }
+
+  nav a:hover {
+    color: var(--green);
+  }
+
+  main {
+    overflow: hidden;
+  }
+
+  .hero,
+  .section,
+  footer {
+    width: min(1120px, calc(100% - 2rem));
+    margin-inline: auto;
+  }
+
+  .hero {
+    min-height: calc(100vh - 76px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(290px, 0.75fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding: clamp(3rem, 8vw, 6rem) 0 2.5rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.8rem;
+    color: var(--green);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h1 {
+    max-width: 780px;
+    margin-bottom: 1rem;
+    color: var(--ink);
+    font-size: clamp(3rem, 8vw, 6.6rem);
+    line-height: 0.92;
+    letter-spacing: 0;
+  }
+
+  h2 {
+    margin-bottom: 0.8rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .lead,
+  .section-heading p {
+    color: var(--muted);
+    font-size: clamp(1rem, 2vw, 1.16rem);
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.85rem 1.15rem;
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    font-weight: 800;
+  }
+
+  .button.primary {
+    color: white;
+    background: var(--green);
+  }
+
+  .button.secondary {
+    color: var(--green-dark);
+    background: white;
+  }
+
+  .hero-panel {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .panel-logo {
+    width: min(260px, 100%);
+    margin-bottom: 1.5rem;
+  }
+
+  dl {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  dl div {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  dl div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  dt {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0.2rem 0 0;
+    font-size: 1.08rem;
+    font-weight: 800;
+  }
+
+  .logo-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 8vw, 6rem);
+    width: 100%;
+    padding: 2rem 1rem;
+    background: white;
+    border-block: 1px solid var(--line);
+  }
+
+  .logo-strip img {
+    max-width: 180px;
+    max-height: 78px;
+    object-fit: contain;
+  }
+
+  .section {
+    padding: clamp(3.2rem, 8vw, 6rem) 0;
+  }
+
+  .section.tinted {
+    width: 100%;
+    padding-inline: max(1rem, calc((100% - 1120px) / 2));
+    background: #edf5f2;
+    border-block: 1px solid var(--line);
+  }
+
+  .section-heading {
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+
+  .section-heading.compact {
+    margin-bottom: 1.2rem;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .summary-grid article,
+  .deliverable-grid article {
+    min-height: 100%;
+    padding: 1.25rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgb(16 33 41 / 6%);
+  }
+
+  .summary-grid span {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    color: var(--blue);
+    font-weight: 900;
+  }
+
+  .summary-grid p,
+  .deliverable-grid p,
+  .timeline p,
+  figcaption,
+  footer p {
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+  }
+
+  th,
+  td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+
+  th {
+    color: var(--green-dark);
+    background: #f8fbfa;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0.28rem 0.65rem;
+    color: #684308;
+    background: #fff3d9;
+    border: 1px solid #f7cf83;
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .timeline article {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    padding: 1.15rem;
+    background: white;
+    border-left: 4px solid var(--green);
+    border-radius: 8px;
+  }
+
+  .timeline strong {
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+
+  .deliverable-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .results figure {
+    margin: 0;
+    padding: clamp(0.7rem, 2vw, 1rem);
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .results img {
+    width: 100%;
+    border-radius: 6px;
+  }
+
+  figcaption {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2rem 0 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  footer img {
+    width: 150px;
+  }
+
+  footer p {
+    margin: 0;
+    text-align: right;
+  }
+
+  @media (max-width: 860px) {
+    .site-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    nav {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .hero {
+      min-height: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .summary-grid,
+    .timeline,
+    .deliverable-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .hero,
+    .section,
+    footer {
+      width: min(100% - 1rem, 1120px);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 18vw, 4.4rem);
+    }
+
+    .brand img {
+      width: 128px;
+    }
+
+    nav {
+      gap: 0.45rem;
+      font-size: 0.82rem;
+    }
+
+    .logo-strip {
+      flex-direction: column;
+    }
+
+    .button {
+      width: 100%;
+    }
+
+    footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    footer p {
+      text-align: left;
+    }
+  }
+</style>
