@@ -10,6 +10,7 @@ import georeferencia from "../../resultados/georeferencia.jpeg";
 import historicoOutput from "../../resultados/hisoticoOutput.jpeg";
 import agente from "../../resultados/agente.jpeg";
 import grafoCriticidad from "../../resultados/grafo_criticidad_completo.jpg";
+import modoRelevancia from "../../resultados/modoRelevancia.jpeg";
 
 const etapas = [
   ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
@@ -472,6 +473,11 @@ const cronograma = [
           ventanas temporales de vanos para crear informes automatizados con agentes de IA de las posibles
           causas y la historia reciente de los fallos de dicho vano
         </p>
+
+        <figure class="mode-figure">
+          <h3>Análisis de importancia de modos en predicción de criticidad</h3>
+          <img src={modoRelevancia.src} alt="Análisis de importancia de modos en predicción de criticidad" />
+        </figure>
       </section>
     </main>
 
@@ -1066,6 +1072,29 @@ const cronograma = [
     font-size: clamp(1.05rem, 2vw, 1.28rem);
     font-weight: 800;
     line-height: 1.5;
+  }
+
+  .mode-figure {
+    margin: 1rem 0 0;
+    padding: clamp(1rem, 3vw, 1.3rem);
+    background: #f8fbfa;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgb(16 33 41 / 8%);
+  }
+
+  .mode-figure h3 {
+    margin-bottom: 1rem;
+    color: var(--green-dark);
+    font-size: clamp(1.35rem, 3vw, 2.1rem);
+    line-height: 1.1;
+  }
+
+  .mode-figure img {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: white;
   }
 
   footer {
