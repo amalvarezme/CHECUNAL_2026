@@ -3,6 +3,8 @@ import logoLab from "../../logos/logo_labIA.png";
 import logoChec from "../../logos/checlogo.png";
 import logoUnal from "../../logos/logo_unal_transparente.png";
 import metodologia from "../../resultados/metodolgia.png";
+import dataIntelligenceEngine from "../../resultados/data_intelligence_engine.png";
+import databricksLogo from "../../resultados/databricks.png";
 
 const etapas = [
   ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
@@ -267,6 +269,47 @@ const cronograma = [
           <img src={metodologia.src} alt="Metodología actual del simulador de criticidad CHEC" />
           <figcaption>Figura de avance: metodología del simulador de criticidad CHEC.</figcaption>
         </figure>
+      </section>
+
+      <section id="despliegue" class="section cloud">
+        <div class="section-heading">
+          <p class="eyebrow">Despliegue en nube - CHEC</p>
+          <h2>Databricks como plataforma de analítica e IA</h2>
+          <p>
+            Databricks permite integrar datos, modelos y aplicaciones analíticas en un entorno gobernado,
+            escalable y preparado para operación empresarial.
+          </p>
+        </div>
+
+        <div class="cloud-layout">
+          <div class="cloud-copy">
+            <a class="cloud-link" href="https://www.databricks.com/" target="_blank" rel="noreferrer">
+              Ir a Databricks
+            </a>
+            <div class="cloud-items">
+              <article>
+                <h3>Plataforma lakehouse</h3>
+                <p>Unifica almacenamiento, procesamiento y analítica para trabajar con datos estructurados y no estructurados.</p>
+              </article>
+              <article>
+                <h3>IA y datos gobernados</h3>
+                <p>Facilita construir, entrenar y desplegar modelos con trazabilidad, seguridad y control de acceso.</p>
+              </article>
+              <article>
+                <h3>Escalabilidad en nube</h3>
+                <p>Permite ejecutar cargas de trabajo de datos e inteligencia artificial ajustando recursos según la demanda.</p>
+              </article>
+            </div>
+          </div>
+          <div class="cloud-visuals" aria-label="Referencias visuales de Databricks">
+            <img class="databricks-mark" src={databricksLogo.src} alt="Logo Databricks" />
+            <img
+              class="engine-figure"
+              src={dataIntelligenceEngine.src}
+              alt="Esquema Data Intelligence Engine de Databricks"
+            />
+          </div>
+        </div>
       </section>
     </main>
 
@@ -646,6 +689,71 @@ const cronograma = [
     font-size: 0.95rem;
   }
 
+  .cloud {
+    padding-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .cloud-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+    gap: clamp(1.2rem, 4vw, 2.5rem);
+    align-items: start;
+  }
+
+  .cloud-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    background: #ff3621;
+    border: 1px solid #cf2d1d;
+    border-radius: 6px;
+    font-weight: 800;
+  }
+
+  .cloud-items {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .cloud-items article {
+    padding: 1rem;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .cloud-items p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .cloud-visuals {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(0.8rem, 2vw, 1rem);
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .databricks-mark {
+    width: min(180px, 100%);
+    max-height: 70px;
+    object-fit: contain;
+  }
+
+  .engine-figure {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+  }
+
   footer {
     display: flex;
     align-items: center;
@@ -682,7 +790,8 @@ const cronograma = [
 
     .summary-grid,
     .timeline,
-    .deliverable-grid {
+    .deliverable-grid,
+    .cloud-layout {
       grid-template-columns: 1fr;
     }
   }
