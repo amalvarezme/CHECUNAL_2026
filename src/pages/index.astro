@@ -1091,7 +1091,8 @@ const cronograma = [
   }
 
   .mode-figure img {
-    width: 100%;
+    width: min(70%, 720px);
+    margin-inline: auto;
     border: 1px solid var(--line);
     border-radius: 6px;
     background: white;
@@ -1145,6 +1146,10 @@ const cronograma = [
   @media (max-width: 720px) {
     .graph-figure img {
       min-height: 260px;
+    }
+
+    .mode-figure img {
+      width: 100%;
     }
   }
 
