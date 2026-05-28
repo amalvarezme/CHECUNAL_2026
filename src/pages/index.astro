@@ -5,6 +5,10 @@ import logoUnal from "../../logos/logo_unal_transparente.png";
 import metodologia from "../../resultados/metodolgia.png";
 import dataIntelligenceEngine from "../../resultados/data_intelligence_engine.png";
 import databricksLogo from "../../resultados/databricks.png";
+import pdfData from "../../resultados/pdfData.jpeg";
+import georeferencia from "../../resultados/georeferencia.jpeg";
+import historicoOutput from "../../resultados/hisoticoOutput.jpeg";
+import agente from "../../resultados/agente.jpeg";
 
 const etapas = [
   ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
@@ -308,6 +312,56 @@ const cronograma = [
               src={dataIntelligenceEngine.src}
               alt="Esquema Data Intelligence Engine de Databricks"
             />
+          </div>
+        </div>
+      </section>
+
+      <section id="prototipo-databricks" class="section prototype">
+        <div class="section-heading">
+          <p class="eyebrow">Prototipo 1 - Ajustado en Databricks</p>
+          <h2>Funcionalidades migradas y fortalecidas</h2>
+          <p>
+            Se migraron sobre Databricks las funcionalidades principales del Prototipo 1, incorporando
+            mejoras de visualización, organización de salidas y un agente para apoyar recomendaciones de
+            criticidad sobre los activos analizados.
+          </p>
+        </div>
+
+        <div class="prototype-showcase">
+          <article class="feature-shot">
+            <div>
+              <span>Visualización territorial</span>
+              <h3>Georreferenciación de activos y criticidad</h3>
+              <p>
+                Vista espacial para explorar zonas, activos y concentración de criticidad dentro del flujo
+                analítico desplegado en nube.
+              </p>
+            </div>
+            <img src={georeferencia.src} alt="Vista georreferenciada del prototipo en Databricks" />
+          </article>
+
+          <div class="prototype-gallery">
+            <article>
+              <img src={pdfData.src} alt="Extracción y consulta de datos desde documentos PDF" />
+              <div>
+                <h3>Datos desde PDF</h3>
+                <p>Consulta estructurada de información técnica para alimentar análisis y reportes.</p>
+              </div>
+            </article>
+            <article>
+              <img src={historicoOutput.src} alt="Salida histórica del prototipo ajustado" />
+              <div>
+                <h3>Salidas históricas</h3>
+                <p>Mejor lectura de resultados previos y trazabilidad de los indicadores generados.</p>
+              </div>
+            </article>
+            <article>
+              <img src={agente.src} alt="Agente de recomendaciones de criticidad" />
+              <div>
+                <h3>Agente de criticidad</h3>
+                <p>Asistente para recomendaciones orientadas a priorización y soporte operativo.</p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -754,6 +808,90 @@ const cronograma = [
     border: 1px solid var(--line);
   }
 
+  .prototype {
+    width: 100%;
+    padding-inline: max(1rem, calc((100% - 1120px) / 2));
+    background: linear-gradient(180deg, #f8fbfa 0%, #eef6f3 100%);
+    border-top: 1px solid var(--line);
+  }
+
+  .prototype-showcase {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .feature-shot {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.45fr) minmax(0, 0.55fr);
+    gap: clamp(1rem, 3vw, 1.6rem);
+    align-items: center;
+    padding: clamp(1rem, 3vw, 1.4rem);
+    color: white;
+    background: linear-gradient(135deg, #10352e 0%, #0b5f8a 100%);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .feature-shot span {
+    display: inline-flex;
+    margin-bottom: 0.7rem;
+    color: #ffe2a6;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .feature-shot h3 {
+    max-width: 420px;
+    margin-bottom: 0.7rem;
+    font-size: clamp(1.5rem, 3vw, 2.35rem);
+    line-height: 1.05;
+  }
+
+  .feature-shot p {
+    margin-bottom: 0;
+    color: rgb(255 255 255 / 82%);
+    line-height: 1.6;
+  }
+
+  .feature-shot img {
+    width: 100%;
+    border: 1px solid rgb(255 255 255 / 20%);
+    border-radius: 6px;
+    box-shadow: 0 18px 44px rgb(0 0 0 / 20%);
+  }
+
+  .prototype-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .prototype-gallery article {
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgb(16 33 41 / 8%);
+  }
+
+  .prototype-gallery img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .prototype-gallery div {
+    padding: 1rem;
+  }
+
+  .prototype-gallery p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
   footer {
     display: flex;
     align-items: center;
@@ -791,7 +929,9 @@ const cronograma = [
     .summary-grid,
     .timeline,
     .deliverable-grid,
-    .cloud-layout {
+    .cloud-layout,
+    .feature-shot,
+    .prototype-gallery {
       grid-template-columns: 1fr;
     }
   }
