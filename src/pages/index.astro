@@ -9,6 +9,7 @@ import pdfData from "../../resultados/pdfData.jpeg";
 import georeferencia from "../../resultados/georeferencia.jpeg";
 import historicoOutput from "../../resultados/hisoticoOutput.jpeg";
 import agente from "../../resultados/agente.jpeg";
+import grafoCriticidad from "../../resultados/grafo_criticidad_completo.jpg";
 
 const etapas = [
   ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
@@ -364,6 +365,113 @@ const cronograma = [
             </article>
           </div>
         </div>
+      </section>
+
+      <section id="criticidad-fisica" class="section physics">
+        <div class="section-heading">
+          <p class="eyebrow">Estudio de la criticidad por redes informadas por la física</p>
+          <h2>Grafo físico, eléctrico y espacio-temporal</h2>
+          <p>
+            La propuesta modela la red como un grafo interconectado de activos, variables eléctricas,
+            geometría de vanos y clima en ventanas temporales de 12 horas, para estudiar criticidad con
+            relaciones físicas explícitas.
+          </p>
+        </div>
+
+        <div class="physics-summary">
+          <article>
+            <h3>Variables integradas</h3>
+            <p>El modelo consolida 179 variables de activos físicos, configuración eléctrica, geometría, entorno y clima.</p>
+          </article>
+          <article>
+            <h3>Conexiones informadas por física</h3>
+            <p>La matriz de adyacencia relaciona viento, vegetación, temperatura, radiación, capacidad del conductor y topología.</p>
+          </article>
+          <article>
+            <h3>Análisis de grafos</h3>
+            <p>Se exploran centralidad, dependencias aguas abajo, transferencia de potencia, resiliencia y propagación de fallas.</p>
+          </article>
+        </div>
+
+        <div class="table-wrap physics-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Modo de criticidad</th>
+                <th>Cantidad de características</th>
+                <th>Detalle de las variables</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Estructural General</td>
+                <td>19</td>
+                <td>Identificadores, fechas, taxonomía, datos administrativos.</td>
+              </tr>
+              <tr>
+                <td>Configuración Eléctrica</td>
+                <td>15</td>
+                <td>Fases, carga, usuarios, capacidad, identificadores de red.</td>
+              </tr>
+              <tr>
+                <td>Geometría Red</td>
+                <td>5</td>
+                <td>Longitudes, alturas y puestas a tierra.</td>
+              </tr>
+              <tr>
+                <td>Materiales Conductor</td>
+                <td>5</td>
+                <td>Calibres, materiales y tipos de conductor.</td>
+              </tr>
+              <tr>
+                <td>Espacial</td>
+                <td>4</td>
+                <td>Coordenadas origen y destino (X1, Y1, X2, Y2).</td>
+              </tr>
+              <tr>
+                <td>Entorno Vegetación</td>
+                <td>1</td>
+                <td>Índice o clasificación de vegetación.</td>
+              </tr>
+              <tr>
+                <td>Hidrometeorológico</td>
+                <td>52</td>
+                <td>13h (0-12) de precipitación, humedad, nubosidad y visibilidad.</td>
+              </tr>
+              <tr>
+                <td>Eólico</td>
+                <td>26</td>
+                <td>13h (0-12) de velocidad de viento y ráfagas.</td>
+              </tr>
+              <tr>
+                <td>Barométrico</td>
+                <td>26</td>
+                <td>13h (0-12) de presión atmosférica y presión en superficie.</td>
+              </tr>
+              <tr>
+                <td>Térmico Radiativo</td>
+                <td>26</td>
+                <td>13h (0-12) de temperatura y radiación solar.</td>
+              </tr>
+              <tr>
+                <td><strong>TOTAL DE VARIABLES</strong></td>
+                <td><strong>179</strong></td>
+                <td><strong>Base de datos completa (Activos + Clima).</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="graph-figure">
+          <img src={grafoCriticidad.src} alt="Grafo completo de criticidad informado por la física" />
+          <figcaption>Grafo completo de criticidad para el análisis informado por la física.</figcaption>
+        </figure>
+
+        <p class="graph-note">
+          Estamos ajustando el modelo para incluir grafos, múltiples salidas de criticidad y análisis por
+          ventanas temporales de vanos para crear informes automatizados con agentes de IA de las posibles
+          causas y la historia reciente de los fallos de dicho vano
+        </p>
       </section>
     </main>
 
@@ -892,6 +1000,74 @@ const cronograma = [
     line-height: 1.55;
   }
 
+  .physics {
+    width: 100%;
+    padding-inline: max(1rem, calc((100% - 1120px) / 2));
+    background: white;
+    border-top: 1px solid var(--line);
+  }
+
+  .physics-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .physics-summary article {
+    padding: 1.1rem;
+    background: #f8fbfa;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .physics-summary p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .physics-table {
+    margin-bottom: 1.2rem;
+  }
+
+  .physics-table td:nth-child(2),
+  .physics-table th:nth-child(2) {
+    width: 170px;
+    text-align: center;
+  }
+
+  .graph-figure {
+    margin: 0;
+    padding: clamp(0.7rem, 2vw, 1rem);
+    background: #f8fbfa;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .graph-figure img {
+    width: 100%;
+    min-height: 420px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: white;
+  }
+
+  .graph-note {
+    max-width: 980px;
+    margin: 1rem auto 0;
+    padding: clamp(1rem, 3vw, 1.4rem);
+    color: var(--ink);
+    background: #fff7e6;
+    border: 1px solid #f3d28c;
+    border-left: 5px solid var(--gold);
+    border-radius: 8px;
+    font-size: clamp(1.05rem, 2vw, 1.28rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   footer {
     display: flex;
     align-items: center;
@@ -931,8 +1107,15 @@ const cronograma = [
     .deliverable-grid,
     .cloud-layout,
     .feature-shot,
-    .prototype-gallery {
+    .prototype-gallery,
+    .physics-summary {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .graph-figure img {
+      min-height: 260px;
     }
   }
 
