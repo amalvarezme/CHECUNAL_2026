@@ -1,0 +1,268 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 900px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 900px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+
+<div style="position: absolute; top: 20px; left: 20px; z-index: 1000; background-color: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; border: 1px solid #e0e0e0;">
+    <h3 style="margin-top: 0; margin-bottom: 12px; font-size: 16px; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 5px;">Diccionario de Modos</h3>
+<div style="display: flex; align-items: center; margin-bottom: 6px;"><span style="display: inline-block; width: 14px; height: 14px; background-color: #e74c3c; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(0,0,0,0.2);"></span>Modo A: Eventos e Impacto</div>
+<div style="display: flex; align-items: center; margin-bottom: 6px;"><span style="display: inline-block; width: 14px; height: 14px; background-color: #f39c12; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(0,0,0,0.2);"></span>Modo B: Protección y Maniobra</div>
+<div style="display: flex; align-items: center; margin-bottom: 6px;"><span style="display: inline-block; width: 14px; height: 14px; background-color: #9b59b6; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(0,0,0,0.2);"></span>Modo C: Topología</div>
+<div style="display: flex; align-items: center; margin-bottom: 6px;"><span style="display: inline-block; width: 14px; height: 14px; background-color: #3498db; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(0,0,0,0.2);"></span>Modo D: Físicas y Eléctricas</div>
+<div style="display: flex; align-items: center; margin-bottom: 6px;"><span style="display: inline-block; width: 14px; height: 14px; background-color: #1abc9c; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(0,0,0,0.2);"></span>Modo E: Activos (Apoyo/Trafo)</div>
+<div style="display: flex; align-items: center; margin-bottom: 6px;"><span style="display: inline-block; width: 14px; height: 14px; background-color: #2ecc71; border-radius: 50%; margin-right: 10px; border: 1px solid rgba(0,0,0,0.2);"></span>Modo F: Entorno y Clima</div>
+</div>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#e74c3c", "font": {"color": "black"}, "id": "DURACION", "label": "DURACION", "shape": "dot", "size": 15, "title": "DURACION\n(Eventos e Impacto)"}, {"color": "#e74c3c", "font": {"color": "black"}, "id": "UITI", "label": "UITI", "shape": "dot", "size": 15, "title": "UITI\n(Eventos e Impacto)"}, {"color": "#e74c3c", "font": {"color": "black"}, "id": "TOT_USUS", "label": "TOT_USUS", "shape": "dot", "size": 15, "title": "TOT_USUS\n(Eventos e Impacto)"}, {"color": "#e74c3c", "font": {"color": "black"}, "id": "CNT_TRF", "label": "CNT_TRF", "shape": "dot", "size": 15, "title": "CNT_TRF\n(Eventos e Impacto)"}, {"color": "#e74c3c", "font": {"color": "black"}, "id": "COD_CAUSA", "label": "COD_CAUSA", "shape": "dot", "size": 15, "title": "COD_CAUSA\n(Eventos e Impacto)"}, {"color": "#e74c3c", "font": {"color": "black"}, "id": "DESC_CAUSA", "label": "DESC_CAUSA", "shape": "dot", "size": 15, "title": "DESC_CAUSA\n(Eventos e Impacto)"}, {"color": "#e74c3c", "font": {"color": "black"}, "id": "FECHA", "label": "FECHA", "shape": "dot", "size": 15, "title": "FECHA\n(Eventos e Impacto)"}, {"color": "#f39c12", "font": {"color": "black"}, "id": "FID_SW", "label": "FID_SW", "shape": "dot", "size": 15, "title": "FID_SW\n(Protecci\u00f3n y Maniobra)"}, {"color": "#f39c12", "font": {"color": "black"}, "id": "TIPO", "label": "TIPO", "shape": "dot", "size": 15, "title": "TIPO\n(Protecci\u00f3n y Maniobra)"}, {"color": "#f39c12", "font": {"color": "black"}, "id": "COD_EQ_PROTEGE", "label": "COD_EQ_PROTEGE", "shape": "dot", "size": 15, "title": "COD_EQ_PROTEGE\n(Protecci\u00f3n y Maniobra)"}, {"color": "#f39c12", "font": {"color": "black"}, "id": "T_USUS_EQ_PROT", "label": "T_USUS_EQ_PROT", "shape": "dot", "size": 15, "title": "T_USUS_EQ_PROT\n(Protecci\u00f3n y Maniobra)"}, {"color": "#f39c12", "font": {"color": "black"}, "id": "CNT_VN_SW", "label": "CNT_VN_SW", "shape": "dot", "size": 15, "title": "CNT_VN_SW\n(Protecci\u00f3n y Maniobra)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "CIRCUITO", "label": "CIRCUITO", "shape": "dot", "size": 15, "title": "CIRCUITO\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "FID_VANO", "label": "FID_VANO", "shape": "dot", "size": 15, "title": "FID_VANO\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "LVSW", "label": "LVSW", "shape": "dot", "size": 15, "title": "LVSW\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "X1", "label": "X1", "shape": "dot", "size": 15, "title": "X1\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "Y1", "label": "Y1", "shape": "dot", "size": 15, "title": "Y1\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "X2", "label": "X2", "shape": "dot", "size": 15, "title": "X2\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "Y2", "label": "Y2", "shape": "dot", "size": 15, "title": "Y2\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "CNT_VN", "label": "CNT_VN", "shape": "dot", "size": 15, "title": "CNT_VN\n(Topolog\u00eda)"}, {"color": "#9b59b6", "font": {"color": "black"}, "id": "PORC_APORTE_VANO", "label": "PORC_APORTE_VANO", "shape": "dot", "size": 15, "title": "PORC_APORTE_VANO\n(Topolog\u00eda)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "FECHA_OPERACION_VANO", "label": "FECHA_OPERACION_VANO", "shape": "dot", "size": 15, "title": "FECHA_OPERACION_VANO\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "CONDUCTOR", "label": "CONDUCTOR", "shape": "dot", "size": 15, "title": "CONDUCTOR\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "LONGITUD", "label": "LONGITUD", "shape": "dot", "size": 15, "title": "LONGITUD\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "CALIBRE_NEUTRO", "label": "CALIBRE_NEUTRO", "shape": "dot", "size": 15, "title": "CALIBRE_NEUTRO\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "NG_RED", "label": "NG_RED", "shape": "dot", "size": 15, "title": "NG_RED\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "DDT", "label": "DDT", "shape": "dot", "size": 15, "title": "DDT\n(Entorno y Clima)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "PROMEDIO_KWH_VANO", "label": "PROMEDIO_KWH_VANO", "shape": "dot", "size": 15, "title": "PROMEDIO_KWH_VANO\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "CNT_FASES", "label": "CNT_FASES", "shape": "dot", "size": 15, "title": "CNT_FASES\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#3498db", "font": {"color": "black"}, "id": "TIPO_TAX", "label": "TIPO_TAX", "shape": "dot", "size": 15, "title": "TIPO_TAX\n(F\u00edsicas y El\u00e9ctricas)"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "COD_APOYO_FIN", "label": "COD_APOYO_FIN", "shape": "dot", "size": 15, "title": "COD_APOYO_FIN\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "FID_APOYO_FIN", "label": "FID_APOYO_FIN", "shape": "dot", "size": 15, "title": "FID_APOYO_FIN\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "FID_TRAFO", "label": "FID_TRAFO", "shape": "dot", "size": 15, "title": "FID_TRAFO\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "PROPIETARIO", "label": "PROPIETARIO", "shape": "dot", "size": 15, "title": "PROPIETARIO\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "CLASE", "label": "CLASE", "shape": "dot", "size": 15, "title": "CLASE\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "VAL_CRIT_APOYO", "label": "VAL_CRIT_APOYO", "shape": "dot", "size": 15, "title": "VAL_CRIT_APOYO\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "ELEMENTO", "label": "ELEMENTO", "shape": "dot", "size": 15, "title": "ELEMENTO\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "NORMA", "label": "NORMA", "shape": "dot", "size": 15, "title": "NORMA\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "ALTURA", "label": "ALTURA", "shape": "dot", "size": 15, "title": "ALTURA\n(Activos (Apoyo/Trafo))"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "NR_T", "label": "NR_T", "shape": "dot", "size": 15, "title": "NR_T\n(Entorno y Clima)"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "LONG_CRUCETA", "label": "LONG_CRUCETA", "shape": "dot", "size": 15, "title": "LONG_CRUCETA\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "CANTIDAD_TIERRA", "label": "CANTIDAD_TIERRA", "shape": "dot", "size": 15, "title": "CANTIDAD_TIERRA\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "CODIGO", "label": "CODIGO", "shape": "dot", "size": 15, "title": "CODIGO\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "CAPACIDAD_NOMINAL", "label": "CAPACIDAD_NOMINAL", "shape": "dot", "size": 15, "title": "CAPACIDAD_NOMINAL\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "CNT_USUS", "label": "CNT_USUS", "shape": "dot", "size": 15, "title": "CNT_USUS\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "FECHA_OPERACION_TRF", "label": "FECHA_OPERACION_TRF", "shape": "dot", "size": 15, "title": "FECHA_OPERACION_TRF\n(Activos (Apoyo/Trafo))"}, {"color": "#1abc9c", "font": {"color": "black"}, "id": "PROMEDIO_KWH_TRF", "label": "PROMEDIO_KWH_TRF", "shape": "dot", "size": 15, "title": "PROMEDIO_KWH_TRF\n(Activos (Apoyo/Trafo))"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_0", "label": "PREP_0", "shape": "dot", "size": 15, "title": "PREP_0\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_1", "label": "PREP_1", "shape": "dot", "size": 15, "title": "PREP_1\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_2", "label": "PREP_2", "shape": "dot", "size": 15, "title": "PREP_2\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_3", "label": "PREP_3", "shape": "dot", "size": 15, "title": "PREP_3\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_4", "label": "PREP_4", "shape": "dot", "size": 15, "title": "PREP_4\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_5", "label": "PREP_5", "shape": "dot", "size": 15, "title": "PREP_5\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_6", "label": "PREP_6", "shape": "dot", "size": 15, "title": "PREP_6\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_7", "label": "PREP_7", "shape": "dot", "size": 15, "title": "PREP_7\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_8", "label": "PREP_8", "shape": "dot", "size": 15, "title": "PREP_8\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_9", "label": "PREP_9", "shape": "dot", "size": 15, "title": "PREP_9\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_10", "label": "PREP_10", "shape": "dot", "size": 15, "title": "PREP_10\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_11", "label": "PREP_11", "shape": "dot", "size": 15, "title": "PREP_11\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "PREP_12", "label": "PREP_12", "shape": "dot", "size": 15, "title": "PREP_12\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_0", "label": "CLOUDS_0", "shape": "dot", "size": 15, "title": "CLOUDS_0\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_1", "label": "CLOUDS_1", "shape": "dot", "size": 15, "title": "CLOUDS_1\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_2", "label": "CLOUDS_2", "shape": "dot", "size": 15, "title": "CLOUDS_2\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_3", "label": "CLOUDS_3", "shape": "dot", "size": 15, "title": "CLOUDS_3\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_4", "label": "CLOUDS_4", "shape": "dot", "size": 15, "title": "CLOUDS_4\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_5", "label": "CLOUDS_5", "shape": "dot", "size": 15, "title": "CLOUDS_5\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_6", "label": "CLOUDS_6", "shape": "dot", "size": 15, "title": "CLOUDS_6\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_7", "label": "CLOUDS_7", "shape": "dot", "size": 15, "title": "CLOUDS_7\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_8", "label": "CLOUDS_8", "shape": "dot", "size": 15, "title": "CLOUDS_8\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_9", "label": "CLOUDS_9", "shape": "dot", "size": 15, "title": "CLOUDS_9\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_10", "label": "CLOUDS_10", "shape": "dot", "size": 15, "title": "CLOUDS_10\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_11", "label": "CLOUDS_11", "shape": "dot", "size": 15, "title": "CLOUDS_11\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "CLOUDS_12", "label": "CLOUDS_12", "shape": "dot", "size": 15, "title": "CLOUDS_12\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_0", "label": "VIS_0", "shape": "dot", "size": 15, "title": "VIS_0\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_1", "label": "VIS_1", "shape": "dot", "size": 15, "title": "VIS_1\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_2", "label": "VIS_2", "shape": "dot", "size": 15, "title": "VIS_2\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_3", "label": "VIS_3", "shape": "dot", "size": 15, "title": "VIS_3\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_4", "label": "VIS_4", "shape": "dot", "size": 15, "title": "VIS_4\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_5", "label": "VIS_5", "shape": "dot", "size": 15, "title": "VIS_5\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_6", "label": "VIS_6", "shape": "dot", "size": 15, "title": "VIS_6\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_7", "label": "VIS_7", "shape": "dot", "size": 15, "title": "VIS_7\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_8", "label": "VIS_8", "shape": "dot", "size": 15, "title": "VIS_8\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_9", "label": "VIS_9", "shape": "dot", "size": 15, "title": "VIS_9\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_10", "label": "VIS_10", "shape": "dot", "size": 15, "title": "VIS_10\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_11", "label": "VIS_11", "shape": "dot", "size": 15, "title": "VIS_11\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "VIS_12", "label": "VIS_12", "shape": "dot", "size": 15, "title": "VIS_12\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_0", "label": "WIND_SPD_0", "shape": "dot", "size": 15, "title": "WIND_SPD_0\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_1", "label": "WIND_SPD_1", "shape": "dot", "size": 15, "title": "WIND_SPD_1\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_2", "label": "WIND_SPD_2", "shape": "dot", "size": 15, "title": "WIND_SPD_2\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_3", "label": "WIND_SPD_3", "shape": "dot", "size": 15, "title": "WIND_SPD_3\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_4", "label": "WIND_SPD_4", "shape": "dot", "size": 15, "title": "WIND_SPD_4\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_5", "label": "WIND_SPD_5", "shape": "dot", "size": 15, "title": "WIND_SPD_5\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_6", "label": "WIND_SPD_6", "shape": "dot", "size": 15, "title": "WIND_SPD_6\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_7", "label": "WIND_SPD_7", "shape": "dot", "size": 15, "title": "WIND_SPD_7\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_8", "label": "WIND_SPD_8", "shape": "dot", "size": 15, "title": "WIND_SPD_8\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_9", "label": "WIND_SPD_9", "shape": "dot", "size": 15, "title": "WIND_SPD_9\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_10", "label": "WIND_SPD_10", "shape": "dot", "size": 15, "title": "WIND_SPD_10\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_11", "label": "WIND_SPD_11", "shape": "dot", "size": 15, "title": "WIND_SPD_11\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_SPD_12", "label": "WIND_SPD_12", "shape": "dot", "size": 15, "title": "WIND_SPD_12\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_0", "label": "WIND_GUST_SPD_0", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_0\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_1", "label": "WIND_GUST_SPD_1", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_1\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_2", "label": "WIND_GUST_SPD_2", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_2\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_3", "label": "WIND_GUST_SPD_3", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_3\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_4", "label": "WIND_GUST_SPD_4", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_4\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_5", "label": "WIND_GUST_SPD_5", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_5\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_6", "label": "WIND_GUST_SPD_6", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_6\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_7", "label": "WIND_GUST_SPD_7", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_7\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_8", "label": "WIND_GUST_SPD_8", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_8\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_9", "label": "WIND_GUST_SPD_9", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_9\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_10", "label": "WIND_GUST_SPD_10", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_10\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_11", "label": "WIND_GUST_SPD_11", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_11\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "WIND_GUST_SPD_12", "label": "WIND_GUST_SPD_12", "shape": "dot", "size": 15, "title": "WIND_GUST_SPD_12\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_0", "label": "TEMP_0", "shape": "dot", "size": 15, "title": "TEMP_0\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_1", "label": "TEMP_1", "shape": "dot", "size": 15, "title": "TEMP_1\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_2", "label": "TEMP_2", "shape": "dot", "size": 15, "title": "TEMP_2\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_3", "label": "TEMP_3", "shape": "dot", "size": 15, "title": "TEMP_3\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_4", "label": "TEMP_4", "shape": "dot", "size": 15, "title": "TEMP_4\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_5", "label": "TEMP_5", "shape": "dot", "size": 15, "title": "TEMP_5\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_6", "label": "TEMP_6", "shape": "dot", "size": 15, "title": "TEMP_6\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_7", "label": "TEMP_7", "shape": "dot", "size": 15, "title": "TEMP_7\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_8", "label": "TEMP_8", "shape": "dot", "size": 15, "title": "TEMP_8\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_9", "label": "TEMP_9", "shape": "dot", "size": 15, "title": "TEMP_9\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_10", "label": "TEMP_10", "shape": "dot", "size": 15, "title": "TEMP_10\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_11", "label": "TEMP_11", "shape": "dot", "size": 15, "title": "TEMP_11\n(Entorno y Clima)"}, {"color": "#2ecc71", "font": {"color": "black"}, "id": "TEMP_12", "label": "TEMP_12", "shape": "dot", "size": 15, "title": "TEMP_12\n(Entorno y Clima)"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "DURACION", "to": "UITI", "width": 1.0}, {"arrows": "to", "from": "TOT_USUS", "to": "UITI", "width": 1.0}, {"arrows": "to", "from": "CNT_TRF", "to": "TOT_USUS", "width": 0.85}, {"arrows": "to", "from": "COD_CAUSA", "to": "DESC_CAUSA", "width": 1.0}, {"arrows": "to", "from": "COD_CAUSA", "to": "FECHA", "width": 0.7}, {"arrows": "to", "from": "FID_SW", "to": "TIPO", "width": 0.9}, {"arrows": "to", "from": "COD_EQ_PROTEGE", "to": "FID_SW", "width": 1.0}, {"arrows": "to", "from": "TIPO", "to": "DURACION", "width": 0.85}, {"arrows": "to", "from": "TIPO", "to": "T_USUS_EQ_PROT", "width": 0.85}, {"arrows": "to", "from": "CNT_VN_SW", "to": "T_USUS_EQ_PROT", "width": 0.8}, {"arrows": "to", "from": "T_USUS_EQ_PROT", "to": "TOT_USUS", "width": 0.95}, {"arrows": "to", "from": "CIRCUITO", "to": "FID_VANO", "width": 0.8}, {"arrows": "to", "from": "FID_VANO", "to": "LVSW", "width": 0.9}, {"arrows": "to", "from": "X1", "to": "FID_VANO", "width": 1.0}, {"arrows": "to", "from": "Y1", "to": "FID_VANO", "width": 1.0}, {"arrows": "to", "from": "X2", "to": "FID_VANO", "width": 1.0}, {"arrows": "to", "from": "Y2", "to": "FID_VANO", "width": 1.0}, {"arrows": "to", "from": "LVSW", "to": "COD_EQ_PROTEGE", "width": 0.85}, {"arrows": "to", "from": "CNT_VN", "to": "COD_EQ_PROTEGE", "width": 0.85}, {"arrows": "to", "from": "PORC_APORTE_VANO", "to": "CNT_VN_SW", "width": 0.7}, {"arrows": "to", "from": "FECHA_OPERACION_VANO", "to": "CONDUCTOR", "width": 0.6}, {"arrows": "to", "from": "LONGITUD", "to": "COD_CAUSA", "width": 0.7}, {"arrows": "to", "from": "CONDUCTOR", "to": "COD_CAUSA", "width": 0.8}, {"arrows": "to", "from": "CALIBRE_NEUTRO", "to": "CONDUCTOR", "width": 0.8}, {"arrows": "to", "from": "NG_RED", "to": "DDT", "width": 0.75}, {"arrows": "to", "from": "PROMEDIO_KWH_VANO", "to": "CNT_FASES", "width": 0.7}, {"arrows": "to", "from": "TIPO_TAX", "to": "FID_VANO", "width": 0.7}, {"arrows": "to", "from": "COD_APOYO_FIN", "to": "FID_APOYO_FIN", "width": 1.0}, {"arrows": "to", "from": "FID_APOYO_FIN", "to": "FID_TRAFO", "width": 0.9}, {"arrows": "to", "from": "PROPIETARIO", "to": "FID_APOYO_FIN", "width": 0.5}, {"arrows": "to", "from": "CLASE", "to": "VAL_CRIT_APOYO", "width": 0.8}, {"arrows": "to", "from": "ELEMENTO", "to": "FID_APOYO_FIN", "width": 0.8}, {"arrows": "to", "from": "NORMA", "to": "VAL_CRIT_APOYO", "width": 0.8}, {"arrows": "to", "from": "ALTURA", "to": "NR_T", "width": 0.75}, {"arrows": "to", "from": "LONG_CRUCETA", "to": "FID_APOYO_FIN", "width": 0.7}, {"arrows": "to", "from": "CANTIDAD_TIERRA", "to": "DDT", "width": 0.85}, {"arrows": "to", "from": "VAL_CRIT_APOYO", "to": "NR_T", "width": 0.6}, {"arrows": "to", "from": "FID_TRAFO", "to": "CODIGO", "width": 1.0}, {"arrows": "to", "from": "CAPACIDAD_NOMINAL", "to": "CNT_USUS", "width": 0.85}, {"arrows": "to", "from": "CNT_USUS", "to": "TOT_USUS", "width": 0.9}, {"arrows": "to", "from": "FECHA_OPERACION_TRF", "to": "FID_TRAFO", "width": 0.6}, {"arrows": "to", "from": "PROMEDIO_KWH_TRF", "to": "CNT_USUS", "width": 0.8}, {"arrows": "to", "from": "NR_T", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "DDT", "to": "COD_CAUSA", "width": 0.9}, {"arrows": "to", "from": "PREP_0", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "PREP_1", "to": "PREP_0", "width": 0.9}, {"arrows": "to", "from": "PREP_2", "to": "PREP_1", "width": 0.9}, {"arrows": "to", "from": "PREP_3", "to": "PREP_2", "width": 0.9}, {"arrows": "to", "from": "PREP_4", "to": "PREP_3", "width": 0.9}, {"arrows": "to", "from": "PREP_5", "to": "PREP_4", "width": 0.9}, {"arrows": "to", "from": "PREP_6", "to": "PREP_5", "width": 0.9}, {"arrows": "to", "from": "PREP_7", "to": "PREP_6", "width": 0.9}, {"arrows": "to", "from": "PREP_8", "to": "PREP_7", "width": 0.9}, {"arrows": "to", "from": "PREP_9", "to": "PREP_8", "width": 0.9}, {"arrows": "to", "from": "PREP_10", "to": "PREP_9", "width": 0.9}, {"arrows": "to", "from": "PREP_11", "to": "PREP_10", "width": 0.9}, {"arrows": "to", "from": "PREP_12", "to": "PREP_11", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_0", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "CLOUDS_1", "to": "CLOUDS_0", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_2", "to": "CLOUDS_1", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_3", "to": "CLOUDS_2", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_4", "to": "CLOUDS_3", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_5", "to": "CLOUDS_4", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_6", "to": "CLOUDS_5", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_7", "to": "CLOUDS_6", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_8", "to": "CLOUDS_7", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_9", "to": "CLOUDS_8", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_10", "to": "CLOUDS_9", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_11", "to": "CLOUDS_10", "width": 0.9}, {"arrows": "to", "from": "CLOUDS_12", "to": "CLOUDS_11", "width": 0.9}, {"arrows": "to", "from": "VIS_0", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "VIS_1", "to": "VIS_0", "width": 0.9}, {"arrows": "to", "from": "VIS_2", "to": "VIS_1", "width": 0.9}, {"arrows": "to", "from": "VIS_3", "to": "VIS_2", "width": 0.9}, {"arrows": "to", "from": "VIS_4", "to": "VIS_3", "width": 0.9}, {"arrows": "to", "from": "VIS_5", "to": "VIS_4", "width": 0.9}, {"arrows": "to", "from": "VIS_6", "to": "VIS_5", "width": 0.9}, {"arrows": "to", "from": "VIS_7", "to": "VIS_6", "width": 0.9}, {"arrows": "to", "from": "VIS_8", "to": "VIS_7", "width": 0.9}, {"arrows": "to", "from": "VIS_9", "to": "VIS_8", "width": 0.9}, {"arrows": "to", "from": "VIS_10", "to": "VIS_9", "width": 0.9}, {"arrows": "to", "from": "VIS_11", "to": "VIS_10", "width": 0.9}, {"arrows": "to", "from": "VIS_12", "to": "VIS_11", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_0", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "WIND_SPD_1", "to": "WIND_SPD_0", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_2", "to": "WIND_SPD_1", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_3", "to": "WIND_SPD_2", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_4", "to": "WIND_SPD_3", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_5", "to": "WIND_SPD_4", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_6", "to": "WIND_SPD_5", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_7", "to": "WIND_SPD_6", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_8", "to": "WIND_SPD_7", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_9", "to": "WIND_SPD_8", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_10", "to": "WIND_SPD_9", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_11", "to": "WIND_SPD_10", "width": 0.9}, {"arrows": "to", "from": "WIND_SPD_12", "to": "WIND_SPD_11", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_0", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "WIND_GUST_SPD_0", "to": "NR_T", "width": 0.8}, {"arrows": "to", "from": "WIND_GUST_SPD_1", "to": "WIND_GUST_SPD_0", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_2", "to": "WIND_GUST_SPD_1", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_3", "to": "WIND_GUST_SPD_2", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_4", "to": "WIND_GUST_SPD_3", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_5", "to": "WIND_GUST_SPD_4", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_6", "to": "WIND_GUST_SPD_5", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_7", "to": "WIND_GUST_SPD_6", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_8", "to": "WIND_GUST_SPD_7", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_9", "to": "WIND_GUST_SPD_8", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_10", "to": "WIND_GUST_SPD_9", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_11", "to": "WIND_GUST_SPD_10", "width": 0.9}, {"arrows": "to", "from": "WIND_GUST_SPD_12", "to": "WIND_GUST_SPD_11", "width": 0.9}, {"arrows": "to", "from": "TEMP_0", "to": "COD_CAUSA", "width": 0.85}, {"arrows": "to", "from": "TEMP_1", "to": "TEMP_0", "width": 0.9}, {"arrows": "to", "from": "TEMP_2", "to": "TEMP_1", "width": 0.9}, {"arrows": "to", "from": "TEMP_3", "to": "TEMP_2", "width": 0.9}, {"arrows": "to", "from": "TEMP_4", "to": "TEMP_3", "width": 0.9}, {"arrows": "to", "from": "TEMP_5", "to": "TEMP_4", "width": 0.9}, {"arrows": "to", "from": "TEMP_6", "to": "TEMP_5", "width": 0.9}, {"arrows": "to", "from": "TEMP_7", "to": "TEMP_6", "width": 0.9}, {"arrows": "to", "from": "TEMP_8", "to": "TEMP_7", "width": 0.9}, {"arrows": "to", "from": "TEMP_9", "to": "TEMP_8", "width": 0.9}, {"arrows": "to", "from": "TEMP_10", "to": "TEMP_9", "width": 0.9}, {"arrows": "to", "from": "TEMP_11", "to": "TEMP_10", "width": 0.9}, {"arrows": "to", "from": "TEMP_12", "to": "TEMP_11", "width": 0.9}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.1,
+            "damping": 0.9,
+            "gravitationalConstant": -2000,
+            "springConstant": 0.05,
+            "springLength": 150
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
