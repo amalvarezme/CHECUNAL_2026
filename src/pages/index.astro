@@ -11,6 +11,7 @@ import historicoOutput from "../../resultados/hisoticoOutput.jpeg";
 import agente from "../../resultados/agente.jpeg";
 import grafoCriticidad from "../../resultados/grafo_criticidad_completo.jpg";
 import modoRelevancia from "../../resultados/modoRelevancia.jpeg";
+import grafoRedNivel2 from "../../resultados/grafo_red_nivel2.html?url";
 
 const etapas = [
   ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
@@ -373,94 +374,158 @@ const cronograma = [
           <p class="eyebrow">Estudio de la criticidad por redes informadas por la física</p>
           <h2>Grafo físico, eléctrico y espacio-temporal</h2>
           <p>
-            La propuesta modela la red como un grafo interconectado de activos, variables eléctricas,
-            geometría de vanos y clima en ventanas temporales de 12 horas, para estudiar criticidad con
-            relaciones físicas explícitas.
+            La red de Nivel de Tensión 2 se modela como un grafo de eventos, activos, protecciones,
+            topología, entorno y clima. Cada falla se interpreta como una interacción entre infraestructura,
+            condiciones ambientales y propagación eléctrica hacia indicadores de calidad del servicio.
           </p>
         </div>
 
         <div class="physics-summary">
           <article>
-            <h3>Variables integradas</h3>
-            <p>El modelo consolida 179 variables de activos físicos, configuración eléctrica, geometría, entorno y clima.</p>
+            <h3>Base de eventos</h3>
+            <p>Cada fila representa una falla y cada columna describe el evento, el vano, los activos, el entorno o el impacto.</p>
           </article>
           <article>
-            <h3>Conexiones informadas por física</h3>
-            <p>La matriz de adyacencia relaciona viento, vegetación, temperatura, radiación, capacidad del conductor y topología.</p>
+            <h3>125 variables en 6 modos</h3>
+            <p>Las entradas se agrupan en evento, protección, topología, características del vano, activos y clima/riesgo.</p>
           </article>
           <article>
-            <h3>Análisis de grafos</h3>
-            <p>Se exploran centralidad, dependencias aguas abajo, transferencia de potencia, resiliencia y propagación de fallas.</p>
+            <h3>Ventanas temporales</h3>
+            <p>Las variables climáticas capturan acumulación de estrés ambiental antes de la falla mediante series por hora.</p>
           </article>
         </div>
 
-        <div class="table-wrap physics-table">
+        <div class="table-wrap physics-table modes-table">
           <table>
             <thead>
               <tr>
-                <th>Modo de criticidad</th>
-                <th>Cantidad de características</th>
-                <th>Detalle de las variables</th>
+                <th>Modo</th>
+                <th>Variables</th>
+                <th>Descripción resumida</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Estructural General</td>
-                <td>19</td>
-                <td>Identificadores, fechas, taxonomía, datos administrativos.</td>
+                <td>Evento, impacto e indicadores</td>
+                <td>7</td>
+                <td>Duración, usuarios, transformadores, UiTi y causa de falla.</td>
               </tr>
               <tr>
-                <td>Configuración Eléctrica</td>
-                <td>15</td>
-                <td>Fases, carga, usuarios, capacidad, identificadores de red.</td>
-              </tr>
-              <tr>
-                <td>Geometría Red</td>
+                <td>Infraestructura de protección y maniobra</td>
                 <td>5</td>
-                <td>Longitudes, alturas y puestas a tierra.</td>
+                <td>Equipo que opera, tipo de protección y usuarios potencialmente expuestos.</td>
               </tr>
               <tr>
-                <td>Materiales Conductor</td>
-                <td>5</td>
-                <td>Calibres, materiales y tipos de conductor.</td>
+                <td>Topología y configuración espacial</td>
+                <td>9</td>
+                <td>Circuito, vano, coordenadas, distancia al equipo y aporte del vano.</td>
               </tr>
               <tr>
-                <td>Espacial</td>
-                <td>4</td>
-                <td>Coordenadas origen y destino (X1, Y1, X2, Y2).</td>
+                <td>Características físicas y eléctricas del vano</td>
+                <td>8</td>
+                <td>Longitud, fases, conductor, neutro, energía promedio y taxonomía.</td>
               </tr>
               <tr>
-                <td>Entorno Vegetación</td>
-                <td>1</td>
-                <td>Índice o clasificación de vegetación.</td>
+                <td>Activos: apoyo final y transformador</td>
+                <td>16</td>
+                <td>Apoyo, norma, altura, cruceta, criticidad del apoyo, transformador y usuarios.</td>
               </tr>
               <tr>
-                <td>Hidrometeorológico</td>
-                <td>52</td>
-                <td>13h (0-12) de precipitación, humedad, nubosidad y visibilidad.</td>
-              </tr>
-              <tr>
-                <td>Eólico</td>
-                <td>26</td>
-                <td>13h (0-12) de velocidad de viento y ráfagas.</td>
-              </tr>
-              <tr>
-                <td>Barométrico</td>
-                <td>26</td>
-                <td>13h (0-12) de presión atmosférica y presión en superficie.</td>
-              </tr>
-              <tr>
-                <td>Térmico Radiativo</td>
-                <td>26</td>
-                <td>13h (0-12) de temperatura y radiación solar.</td>
-              </tr>
-              <tr>
-                <td><strong>TOTAL DE VARIABLES</strong></td>
-                <td><strong>179</strong></td>
-                <td><strong>Base de datos completa (Activos + Clima).</strong></td>
+                <td>Entorno, riesgo y clima</td>
+                <td>80</td>
+                <td>Vegetación, rayos y series temporales de precipitación, nubosidad, visibilidad, viento y temperatura.</td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="connection-intro">
+          <h3>Descripción de conexiones físico/lógicas</h3>
+          <p>
+            El grafo conecta variables por reglas de causalidad técnica: acumulación climática, susceptibilidad
+            material, propagación hacia protecciones, impacto demográfico y cálculo regulatorio.
+          </p>
+        </div>
+
+        <div class="table-wrap physics-table connections-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Relación / peso</th>
+                <th>Justificación técnica</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Series climáticas</td>
+                <td>Nodos de riesgo</td>
+                <td>Acumulación ambiental (0.85)</td>
+                <td>Lluvia, viento y temperatura acumulan estrés sobre aisladores, conductores y entorno.</td>
+              </tr>
+              <tr>
+                <td>Entorno y riesgo</td>
+                <td>Eventos / causa</td>
+                <td>Causa directa (0.90)</td>
+                <td>Vegetación, descargas y ráfagas pueden romper aislamiento dieléctrico o mecánico.</td>
+              </tr>
+              <tr>
+                <td>Físicas y eléctricas</td>
+                <td>Eventos / causa</td>
+                <td>Susceptibilidad material (0.80)</td>
+                <td>Conductor, guarda, material y longitud modulan exposición y resistencia ante fallas.</td>
+              </tr>
+              <tr>
+                <td>Topología</td>
+                <td>Protección</td>
+                <td>Propagación de falla (0.95)</td>
+                <td>Distancia y cantidad de vanos determinan el equipo que debe operar para aislar el daño.</td>
+              </tr>
+              <tr>
+                <td>Activos finales</td>
+                <td>Entorno y riesgo</td>
+                <td>Vulnerabilidad estructural (0.75)</td>
+                <td>Altura, norma y clase del apoyo condicionan respuesta ante árboles, viento y tensión mecánica.</td>
+              </tr>
+              <tr>
+                <td>Carga y consumo</td>
+                <td>Impacto</td>
+                <td>Impacto demográfico (0.85)</td>
+                <td>Usuarios y demanda del transformador explican magnitud del corte e impacto aguas abajo.</td>
+              </tr>
+              <tr>
+                <td>Protección</td>
+                <td>Impacto</td>
+                <td>Aislamiento y tiempos (0.80)</td>
+                <td>Fusibles y reconectadores producen tiempos de reposición e impactos operativos distintos.</td>
+              </tr>
+              <tr>
+                <td>Eventos</td>
+                <td>Indicadores</td>
+                <td>Cálculo regulatorio (1.00)</td>
+                <td>UiTi se deriva de la duración del evento y usuarios afectados.</td>
+              </tr>
+              <tr>
+                <td>Atributos espaciales</td>
+                <td>Topología</td>
+                <td>Geometría de red (1.00)</td>
+                <td>Coordenadas del vano definen trazado físico, longitud y relación con el circuito.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="graph-banner">
+          <div>
+            <span>Grafo interactivo de red Nivel 2</span>
+            <h3>Explora las dependencias entre variables, activos y modos de criticidad</h3>
+            <p>
+              El archivo HTML permite navegar el grafo generado para inspeccionar relaciones entre eventos,
+              protecciones, topología, activos y entorno climático.
+            </p>
+          </div>
+          <a href={grafoRedNivel2} target="_blank" rel="noreferrer">Abrir grafo interactivo</a>
         </div>
 
         <figure class="graph-figure">
@@ -1037,10 +1102,73 @@ const cronograma = [
     margin-bottom: 1.2rem;
   }
 
-  .physics-table td:nth-child(2),
-  .physics-table th:nth-child(2) {
+  .modes-table td:nth-child(2),
+  .modes-table th:nth-child(2) {
     width: 170px;
     text-align: center;
+  }
+
+  .connection-intro {
+    max-width: 760px;
+    margin: 2rem 0 1rem;
+  }
+
+  .connection-intro p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .connections-table table {
+    min-width: 980px;
+  }
+
+  .graph-banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    margin: 1.2rem 0;
+    padding: clamp(1rem, 3vw, 1.4rem);
+    color: white;
+    background: linear-gradient(135deg, #0b5f8a 0%, #007a53 100%);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .graph-banner span {
+    display: inline-flex;
+    margin-bottom: 0.55rem;
+    color: #ffe2a6;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .graph-banner h3 {
+    max-width: 680px;
+    margin-bottom: 0.45rem;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    line-height: 1.1;
+  }
+
+  .graph-banner p {
+    margin-bottom: 0;
+    color: rgb(255 255 255 / 82%);
+    line-height: 1.55;
+  }
+
+  .graph-banner a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.8rem 1rem;
+    color: var(--green-dark);
+    background: white;
+    border-radius: 6px;
+    font-weight: 900;
+    white-space: nowrap;
   }
 
   .graph-figure {
@@ -1138,8 +1266,13 @@ const cronograma = [
     .cloud-layout,
     .feature-shot,
     .prototype-gallery,
-    .physics-summary {
+    .physics-summary,
+    .graph-banner {
       grid-template-columns: 1fr;
+    }
+
+    .graph-banner a {
+      width: 100%;
     }
   }
 
