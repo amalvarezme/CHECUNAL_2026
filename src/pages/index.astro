@@ -9,6 +9,7 @@ import pdfData from "../../resultados/pdfData.jpeg";
 import georeferencia from "../../resultados/georeferencia.jpeg";
 import historicoOutput from "../../resultados/hisoticoOutput.jpeg";
 import agente from "../../resultados/agente.jpeg";
+import grafoRedNivel2 from "../../resultados/grafo_red_nivel2.html?url";
 
 const etapas = [
   ["Entradas de información", "Consolidación de fuentes técnicas, históricas y económicas para alimentar el simulador."],
@@ -511,6 +512,18 @@ const cronograma = [
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="graph-banner">
+          <div>
+            <span>Grafo interactivo de red Nivel 2</span>
+            <h3>Explora las dependencias entre variables, activos y modos de criticidad</h3>
+            <p>
+              Abre el archivo interactivo para navegar las relaciones entre eventos, protecciones,
+              topología, activos y entorno climático.
+            </p>
+          </div>
+          <a href={grafoRedNivel2} target="_blank" rel="noreferrer">Abrir grafo interactivo</a>
         </div>
 
         <p class="graph-note">
@@ -1098,6 +1111,54 @@ const cronograma = [
     min-width: 980px;
   }
 
+  .graph-banner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+    margin: 1.2rem 0;
+    padding: clamp(1rem, 3vw, 1.4rem);
+    color: white;
+    background: linear-gradient(135deg, #0b5f8a 0%, #007a53 100%);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .graph-banner span {
+    display: inline-flex;
+    margin-bottom: 0.55rem;
+    color: #ffe2a6;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .graph-banner h3 {
+    max-width: 680px;
+    margin-bottom: 0.45rem;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    line-height: 1.1;
+  }
+
+  .graph-banner p {
+    margin-bottom: 0;
+    color: rgb(255 255 255 / 82%);
+    line-height: 1.55;
+  }
+
+  .graph-banner a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.8rem 1rem;
+    color: var(--green-dark);
+    background: white;
+    border-radius: 6px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
   .graph-note {
     max-width: 980px;
     margin: 1rem auto 0;
@@ -1152,8 +1213,13 @@ const cronograma = [
     .cloud-layout,
     .feature-shot,
     .prototype-gallery,
-    .physics-summary {
+    .physics-summary,
+    .graph-banner {
       grid-template-columns: 1fr;
+    }
+
+    .graph-banner a {
+      width: 100%;
     }
   }
 
