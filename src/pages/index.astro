@@ -541,26 +541,26 @@ const cronograma = [
           <h2>Simulador multimodal con agentes de IA</h2>
           <p>
             El flujo integra datos tabulares, documentos técnicos, bitácoras operativas, RAG y un modelo
-            predictivo pre-entrenado para explicar fallas, simular intervenciones y generar reportes de
-            evidencia para la toma de decisiones.
+            predictivo pre-entrenado para analizar circuitos o vanos de interés, explicar puntos críticos,
+            simular intervenciones y generar reportes de evidencia para la toma de decisiones.
           </p>
         </div>
 
         <div class="architecture-pillars">
           <article>
             <span>01</span>
-            <h3>Datos estructurados</h3>
-            <p>Eventos de falla, vanos, protecciones, indicadores UiTi, SAIDI, SAIFI y variables de activos.</p>
+            <h3>Circuito o vano</h3>
+            <p>El usuario selecciona el activo de interés y el sistema identifica puntos críticos asociados.</p>
           </article>
           <article>
             <span>02</span>
-            <h3>RAG documental</h3>
-            <p>Bitácoras, reportes, normas y documentos técnicos para sustentar hipótesis y recomendaciones.</p>
+            <h3>Historial y RAG</h3>
+            <p>Se integran eventos de 12 meses, bitácoras, reportes, normas y documentos técnicos.</p>
           </article>
           <article>
             <span>03</span>
-            <h3>Modelo predictivo</h3>
-            <p>Predicción de indicadores y máscaras de relevancia para explicar variables críticas del evento.</p>
+            <h3>Diagnóstico cruzado</h3>
+            <p>Se cotejan diagnósticos descriptivos, evidencia documental y máscaras de relevancia del modelo.</p>
           </article>
           <article>
             <span>04</span>
@@ -573,12 +573,12 @@ const cronograma = [
           <article>
             <span class="agent-type low">Low / Fast</span>
             <h3>Agente 1: Descriptor</h3>
-            <p>Traduce la fila seleccionada en una descripción natural del evento, su infraestructura e impacto.</p>
+            <p>Describe cada punto de interés usando variables, modos, relaciones y causas del contexto del proyecto.</p>
           </article>
           <article>
             <span class="agent-type high">High / Reasoning</span>
             <h3>Agente 2: Histórico</h3>
-            <p>Analiza 12 meses de eventos del vano y busca patrones de degradación en indicadores.</p>
+            <p>Recupera eventos del vano o circuito durante 12 meses y analiza evolución de UiTi, SAIDI y SAIFI.</p>
           </article>
           <article>
             <span class="agent-type high">High / Context</span>
@@ -593,7 +593,7 @@ const cronograma = [
           <article>
             <span class="agent-type high">High / Reasoning</span>
             <h3>Agente 4: Causalidad</h3>
-            <p>Cruza patrones, documentos y máscaras del modelo para construir una narrativa causal robusta.</p>
+            <p>Coteja diagnósticos agénticos, bitácoras/normas y máscaras del modelo para explicar causas.</p>
           </article>
           <article>
             <span class="agent-type low">Low / Fast</span>
@@ -610,26 +610,34 @@ const cronograma = [
         <div class="flow-diagram detailed-flow" aria-label="Diagrama de bloques con conexiones del simulador">
           <div class="flow-title">
             <h3>Diagrama de bloques y conexiones operativas</h3>
-            <p>El flujo muestra entradas, agentes, fuentes consultadas, modelo predictivo y salidas de evidencia.</p>
+            <p>El flujo muestra selección del activo, puntos de interés, análisis paralelo, cotejo de diagnósticos y salida de evidencia.</p>
           </div>
 
           <div class="flow-lane">
             <span class="lane-label">Entrada y contexto</span>
             <article class="flow-node user-node">
               <span>Usuario / Operador</span>
-              <strong>Selecciona evento inicial</strong>
+              <strong>Selecciona circuito o vano</strong>
             </article>
             <div class="flow-connector">
               <strong>1</strong>
-              <span>Fila seleccionada</span>
+              <span>Activo de interés</span>
+            </div>
+            <article class="flow-node data-node">
+              <span>Base tabular</span>
+              <strong>Identifica puntos de interés</strong>
+            </article>
+            <div class="flow-connector">
+              <strong>2</strong>
+              <span>Vanos / circuito + 12 meses</span>
             </div>
             <article class="flow-node agent-low-node">
               <span>Agente 1 Low</span>
-              <strong>Descriptor de contexto</strong>
+              <strong>Diagnóstico descriptivo por punto</strong>
             </article>
             <div class="flow-connector dashed">
               <strong>KB</strong>
-              <span>Diccionarios</span>
+              <span>Variables, modos y causas</span>
             </div>
             <article class="flow-node context-node">
               <span>Contexto.md</span>
@@ -641,18 +649,18 @@ const cronograma = [
             <span class="lane-label">Análisis paralelo</span>
             <article class="flow-node agent-high-node">
               <span>Agente 2 High</span>
-              <strong>Histórico tabular 12 meses</strong>
+              <strong>Evolución histórica de indicadores</strong>
             </article>
             <div class="flow-connector bidirectional">
-              <strong>3a</strong>
-              <span>Consulta / retorno</span>
+              <strong>3</strong>
+              <span>Eventos por vano/circuito</span>
             </div>
             <article class="flow-node data-node">
               <span>Base tabular</span>
               <strong>SAIDI, SAIFI, UiTi y eventos</strong>
             </article>
             <div class="flow-connector">
-              <strong>3b</strong>
+              <strong>4</strong>
               <span>RAG</span>
             </div>
             <article class="flow-node agent-high-node">
@@ -672,11 +680,19 @@ const cronograma = [
           <div class="flow-lane">
             <span class="lane-label">Inferencia y cotejo causal</span>
             <article class="flow-node agent-low-node">
-              <span>Agente 1</span>
-              <strong>Fila actual al modelo</strong>
+              <span>Diagnóstico 3</span>
+              <strong>Descriptivo por punto de interés</strong>
             </article>
             <div class="flow-connector">
-              <strong>4</strong>
+              <strong>5</strong>
+              <span>Historial + RAG</span>
+            </div>
+            <article class="flow-node agent-high-node">
+              <span>Diagnóstico 5</span>
+              <strong>Mejorado con bitácoras y normativa</strong>
+            </article>
+            <div class="flow-connector">
+              <strong>6</strong>
               <span>Variables tabulares</span>
             </div>
             <article class="flow-node model-node">
@@ -684,8 +700,8 @@ const cronograma = [
               <strong>Indicadores + máscaras</strong>
             </article>
             <div class="flow-connector merge">
-              <strong>5</strong>
-              <span>Patrones + docs + relevancias</span>
+              <strong>7</strong>
+              <span>Cotejo diagnósticos 3, 5 y 6</span>
             </div>
             <article class="flow-node agent-high-node emphasis-node">
               <span>Agente 4 High</span>
@@ -700,7 +716,7 @@ const cronograma = [
               <strong>Opciones de intervención</strong>
             </article>
             <div class="flow-connector">
-              <strong>6</strong>
+              <strong>8</strong>
               <span>Variables candidatas</span>
             </div>
             <article class="flow-node agent-low-node">
@@ -708,7 +724,7 @@ const cronograma = [
               <strong>Simulación What-If</strong>
             </article>
             <div class="flow-connector cycle">
-              <strong>7</strong>
+              <strong>9-10</strong>
               <span>Nuevo escenario ⇄ modelo</span>
             </div>
             <article class="flow-node agent-high-node">
@@ -716,7 +732,7 @@ const cronograma = [
               <strong>Redactor de informes</strong>
             </article>
             <div class="flow-connector">
-              <strong>8</strong>
+              <strong>11</strong>
               <span>Evidencias</span>
             </div>
             <article class="flow-node output-node">
@@ -729,7 +745,7 @@ const cronograma = [
         <div class="value-cycle">
           <article>
             <strong>Comprender</strong>
-            <p>Taxonomía de la falla y descripción inicial del evento.</p>
+            <p>Selección de circuito o vano e identificación de puntos de interés.</p>
           </article>
           <article>
             <strong>Contextualizar</strong>

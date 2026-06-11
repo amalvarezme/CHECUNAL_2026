@@ -8,17 +8,17 @@ Este documento describe la arquitectura multi-agente y el flujo de información 
 
 El proceso integra datos estructurados (tabulares) y no estructurados (texto de normativas y bitácoras), culminando en la generación de evidencias:
 
-1. **Selección del Evento Inicial:** El usuario selecciona una fila específica de la Base de Datos de Eventos tabulares.
-2. **Traducción Semántica:** El sistema toma los datos crudos y, utilizando los diccionarios, genera una primera descripción en lenguaje natural del evento (entorno, infraestructura, impacto demográfico).
-3. **Análisis Retrospectivo Tabular (12 Meses):** El sistema consulta el historial de la base de datos para recuperar todos los eventos asociados al mismo **vano** (y circuito) durante el año anterior a la falla, analizando fluctuaciones en los indicadores UiTI, SAIDI y SAIFI.
+1. **Selección del Circuito o vano de interés:** El usuario selecciona un circuito o vano de interés.
+2. **Identificación de puntos de interés** El sistema consulta el historial de la base de datos para recuperar todos los eventos asociados al mismo **vano** (o circuito) durante el año anterior a la falla, analizando fluctuaciones en los indicadores UiTI, SAIDI y SAIFI.
+3. **Traducción Semántica y diagnóstico preliminar agéntico-descriptivo:** El sistema toma los datos crudos y, utilizando la descripción de las variables estudiadas, sus modos, sus relaciones y las posibles causas predeterminadas en el documento @ContextoProyectoSimuladorCHEC.md, genera una descripción preliminar por cada punto de interés. Finalmente, construye un análisis a lo largo del tiempo sobre la evolución de los indicadores y sus causas.
 4. **Análisis Documental y Normativo (RAG):** En paralelo al paso 3, el sistema consulta un repositorio de documentos (PDFs, textos, docs). Revisa:
    - **Bitácoras de Intervenciones:** Extrae el registro de mantenimientos programados (ej. podas, reposiciones) e intervenciones de mitigación asociadas a la zona en el último año.
    - **Normativa de Sistemas de Potencia:** Extrae los lineamientos técnicos aplicables a la infraestructura afectada.
-5. **Diagnóstico Preliminar:** Se consolida el evento actual con el historial tabular y el registro documental para plantear hipótesis de fallos tempranas.
+5. **Diagnóstico Preliminar agéntico descriptivo mejorado (bítacoras, historial y normativa):** Se consolida el evento actual con el historial tabular y el registro documental para plantear hipótesis de fallos tempranas.
 6. **Inferencia del Modelo Predictivo:** Un modelo de IA predictiva procesa las variables tabulares del evento actual y entrega:
    - La predicción matemática de los indicadores.
    - **Máscaras de relevancia (Feature Importance):** Valores de 0 a 1 indicando qué características tienen mayor peso estadístico.
-7. **Cotejo Analítico a Tres Vías (Razonamiento Cruzado):** El sistema realiza un cruce crítico y justifica las causas combinando los patrones históricos, las justificaciones de bitácoras/normas y las máscaras del modelo ML.
+7. **Cotejo Analítico a Tres Vías (Razonamiento Cruzado):** El sistema realiza un cruce crítico y justifica las causas combinando los patrones históricos, las justificaciones de bitácoras/normas y las máscaras del modelo ML. Coteja diagnósticos en puntos 3, 5 y 6.
 8. **Identificación de Escenarios Guiados:** Basado en el cotejo, se presenta una lista filtrada de variables candidatas a intervenir, estrictamente guiadas y validadas por los hallazgos en las bitácoras y la norma.
 9. **Simulación "*What-If*":** El usuario modifica los valores de las variables sugeridas en la interfaz.
 10. **Reevaluación Predictiva:** El modelo predictivo procesa el nuevo escenario y proyecta los nuevos valores de UiTi, SAIDI y SAIFI.
