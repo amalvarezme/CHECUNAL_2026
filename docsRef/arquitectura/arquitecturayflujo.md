@@ -9,7 +9,7 @@ Este documento describe la arquitectura multi-agente y el flujo de información 
 El proceso integra datos estructurados (tabulares) y no estructurados (texto de normativas y bitácoras), culminando en la generación de evidencias:
 
 1. **Selección del Circuito o vano de interés:** El usuario selecciona un circuito o vano de interés.
-2. **Identificación de puntos de interés** El sistema consulta el historial de la base de datos para recuperar todos los eventos asociados al mismo **vano** (o circuito) durante el año anterior a la falla, analizando fluctuaciones en los indicadores UiTI, SAIDI y SAIFI.
+2. **Identificación de puntos de interés:** El sistema consulta el historial de la base de datos para recuperar todos los eventos asociados al mismo **vano** (o circuito) durante el año anterior a la falla, analizando fluctuaciones en los indicadores UiTI, SAIDI y SAIFI.
 3. **Traducción Semántica y diagnóstico preliminar agéntico-descriptivo:** El sistema toma los datos crudos y, utilizando la descripción de las variables estudiadas, sus modos, sus relaciones y las posibles causas predeterminadas en el documento @ContextoProyectoSimuladorCHEC.md, genera una descripción preliminar por cada punto de interés. Finalmente, construye un análisis a lo largo del tiempo sobre la evolución de los indicadores y sus causas.
 4. **Análisis Documental y Normativo (RAG):** En paralelo al paso 3, el sistema consulta un repositorio de documentos (PDFs, textos, docs). Revisa:
    - **Bitácoras de Intervenciones:** Extrae el registro de mantenimientos programados (ej. podas, reposiciones) e intervenciones de mitigación asociadas a la zona en el último año.
