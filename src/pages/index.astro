@@ -607,70 +607,121 @@ const cronograma = [
           </article>
         </div>
 
-        <div class="flow-diagram" aria-label="Diagrama de arquitectura multimodal y flujo">
-          <div class="flow-row">
+        <div class="flow-diagram detailed-flow" aria-label="Diagrama de bloques con conexiones del simulador">
+          <div class="flow-title">
+            <h3>Diagrama de bloques y conexiones operativas</h3>
+            <p>El flujo muestra entradas, agentes, fuentes consultadas, modelo predictivo y salidas de evidencia.</p>
+          </div>
+
+          <div class="flow-lane">
+            <span class="lane-label">Entrada y contexto</span>
             <article class="flow-node user-node">
-              <span>Usuario</span>
-              <strong>Selecciona evento</strong>
+              <span>Usuario / Operador</span>
+              <strong>Selecciona evento inicial</strong>
             </article>
-            <div class="flow-arrow">→</div>
+            <div class="flow-connector">
+              <strong>1</strong>
+              <span>Fila seleccionada</span>
+            </div>
             <article class="flow-node agent-low-node">
-              <span>Agente 1</span>
-              <strong>Descripción y filtros</strong>
+              <span>Agente 1 Low</span>
+              <strong>Descriptor de contexto</strong>
             </article>
-            <div class="flow-arrow split">↘</div>
+            <div class="flow-connector dashed">
+              <strong>KB</strong>
+              <span>Diccionarios</span>
+            </div>
+            <article class="flow-node context-node">
+              <span>Contexto.md</span>
+              <strong>Reglas y modos del sistema</strong>
+            </article>
+          </div>
+
+          <div class="flow-lane">
+            <span class="lane-label">Análisis paralelo</span>
+            <article class="flow-node agent-high-node">
+              <span>Agente 2 High</span>
+              <strong>Histórico tabular 12 meses</strong>
+            </article>
+            <div class="flow-connector bidirectional">
+              <strong>3a</strong>
+              <span>Consulta / retorno</span>
+            </div>
             <article class="flow-node data-node">
               <span>Base tabular</span>
-              <strong>Historial 12 meses</strong>
+              <strong>SAIDI, SAIFI, UiTi y eventos</strong>
             </article>
-            <div class="flow-arrow">→</div>
+            <div class="flow-connector">
+              <strong>3b</strong>
+              <span>RAG</span>
+            </div>
             <article class="flow-node agent-high-node">
-              <span>Agente 2</span>
-              <strong>Patrones numéricos</strong>
+              <span>Agente 3 High</span>
+              <strong>Analista documental</strong>
+            </article>
+            <div class="flow-connector bidirectional">
+              <strong>Docs</strong>
+              <span>Normas y bitácoras</span>
+            </div>
+            <article class="flow-node doc-node">
+              <span>Repositorio documental</span>
+              <strong>PDFs, reportes, normas</strong>
             </article>
           </div>
 
-          <div class="flow-row">
-            <article class="flow-node context-node">
-              <span>Contexto KB</span>
-              <strong>Diccionarios y reglas</strong>
+          <div class="flow-lane">
+            <span class="lane-label">Inferencia y cotejo causal</span>
+            <article class="flow-node agent-low-node">
+              <span>Agente 1</span>
+              <strong>Fila actual al modelo</strong>
             </article>
-            <div class="flow-arrow">⇢</div>
-            <article class="flow-node doc-node">
-              <span>Repositorio RAG</span>
-              <strong>Normas, PDFs y bitácoras</strong>
-            </article>
-            <div class="flow-arrow">→</div>
-            <article class="flow-node agent-high-node">
-              <span>Agente 3</span>
-              <strong>Justificación documental</strong>
-            </article>
-            <div class="flow-arrow">↘</div>
+            <div class="flow-connector">
+              <strong>4</strong>
+              <span>Variables tabulares</span>
+            </div>
             <article class="flow-node model-node">
               <span>Modelo predictivo</span>
-              <strong>Indicadores y relevancias</strong>
+              <strong>Indicadores + máscaras</strong>
+            </article>
+            <div class="flow-connector merge">
+              <strong>5</strong>
+              <span>Patrones + docs + relevancias</span>
+            </div>
+            <article class="flow-node agent-high-node emphasis-node">
+              <span>Agente 4 High</span>
+              <strong>Consultor de criticidad y causalidad</strong>
             </article>
           </div>
 
-          <div class="flow-row central-row">
-            <article class="flow-node agent-high-node emphasis-node">
-              <span>Agente 4</span>
-              <strong>Cotejo causal a tres vías</strong>
-            </article>
-            <div class="flow-arrow">→</div>
-            <article class="flow-node agent-low-node">
-              <span>Agente 5</span>
-              <strong>Escenarios What-If</strong>
-            </article>
-            <div class="flow-arrow">→</div>
+          <div class="flow-lane">
+            <span class="lane-label">Simulación y reporte</span>
             <article class="flow-node agent-high-node">
-              <span>Agente 6</span>
-              <strong>Reporte técnico</strong>
+              <span>Agente 4</span>
+              <strong>Opciones de intervención</strong>
             </article>
-            <div class="flow-arrow">→</div>
+            <div class="flow-connector">
+              <strong>6</strong>
+              <span>Variables candidatas</span>
+            </div>
+            <article class="flow-node agent-low-node">
+              <span>Agente 5 Low</span>
+              <strong>Simulación What-If</strong>
+            </article>
+            <div class="flow-connector cycle">
+              <strong>7</strong>
+              <span>Nuevo escenario ⇄ modelo</span>
+            </div>
+            <article class="flow-node agent-high-node">
+              <span>Agente 6 High</span>
+              <strong>Redactor de informes</strong>
+            </article>
+            <div class="flow-connector">
+              <strong>8</strong>
+              <span>Evidencias</span>
+            </div>
             <article class="flow-node output-node">
-              <span>Salida</span>
-              <strong>Evidencias y razonamientos</strong>
+              <span>Reporte final</span>
+              <strong>Razonamientos y soporte técnico</strong>
             </article>
           </div>
         </div>
@@ -1413,7 +1464,7 @@ const cronograma = [
 
   .flow-diagram {
     display: grid;
-    gap: 0.9rem;
+    gap: 1rem;
     margin: 1.4rem 0;
     padding: clamp(1rem, 3vw, 1.4rem);
     background: white;
@@ -1423,26 +1474,54 @@ const cronograma = [
     overflow-x: auto;
   }
 
-  .flow-row {
+  .flow-title {
+    max-width: 760px;
+  }
+
+  .flow-title p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .flow-lane {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(4, minmax(180px, 1fr));
-    gap: 0.65rem;
+    grid-template-columns:
+      minmax(120px, 0.55fr)
+      minmax(170px, 1fr)
+      minmax(90px, 0.42fr)
+      minmax(170px, 1fr)
+      minmax(90px, 0.42fr)
+      minmax(170px, 1fr)
+      minmax(90px, 0.42fr)
+      minmax(170px, 1fr);
+    gap: 0.75rem;
+    align-items: stretch;
+    min-width: 1160px;
+    padding: 0.8rem;
+    background: #f8fbfa;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .lane-label {
+    display: flex;
     align-items: center;
-    min-width: 920px;
-  }
-
-  .central-row {
-    grid-template-columns: minmax(220px, 1.1fr) auto minmax(180px, 0.9fr) auto minmax(180px, 0.9fr) auto minmax(180px, 0.9fr);
-    padding-top: 0.7rem;
-    border-top: 1px dashed var(--line);
-  }
-
-  .flow-row:not(.central-row) {
-    grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr) auto minmax(180px, 1fr) auto minmax(180px, 1fr);
+    justify-content: center;
+    padding: 0.7rem;
+    color: var(--green-dark);
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
   }
 
   .flow-node {
-    min-height: 100px;
+    min-height: 112px;
     padding: 0.9rem;
     border: 2px solid var(--line);
     border-radius: 8px;
@@ -1463,11 +1542,91 @@ const cronograma = [
     line-height: 1.2;
   }
 
-  .flow-arrow {
+  .flow-connector {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 112px;
     color: var(--green);
-    font-size: 1.7rem;
-    font-weight: 900;
     text-align: center;
+  }
+
+  .flow-connector::before,
+  .flow-connector::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    z-index: 0;
+    display: block;
+  }
+
+  .flow-connector::before {
+    left: 4px;
+    right: 14px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .flow-connector::after {
+    right: 4px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-block: 6px solid transparent;
+    border-left: 9px solid currentColor;
+    background: transparent;
+  }
+
+  .flow-connector strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    min-height: 32px;
+    margin: 0.35rem 0;
+    z-index: 1;
+    color: white;
+    background: var(--green);
+    border-radius: 999px;
+    font-size: 0.78rem;
+  }
+
+  .flow-connector span {
+    max-width: 120px;
+    z-index: 1;
+    padding: 0.12rem 0.28rem;
+    color: var(--muted);
+    background: #f8fbfa;
+    font-size: 0.76rem;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+
+  .flow-connector.dashed::before {
+    background: repeating-linear-gradient(90deg, currentColor 0 7px, transparent 7px 12px);
+  }
+
+  .flow-connector.bidirectional::after {
+    content: "↔";
+    top: 50%;
+    right: 50%;
+    width: auto;
+    height: auto;
+    border: 0;
+    background: #f8fbfa;
+    font-size: 1.2rem;
+    font-weight: 900;
+    transform: translate(50%, -50%);
+  }
+
+  .flow-connector.merge strong {
+    background: var(--blue);
+  }
+
+  .flow-connector.cycle strong {
+    background: #7c5a0d;
   }
 
   .user-node {
