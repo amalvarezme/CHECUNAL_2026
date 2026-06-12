@@ -78,6 +78,14 @@ const modelFeatures = [
   ...climatePrefixes.flatMap((prefix) => Array.from({ length: 12 }, (_, lag) => `${prefix}_${lag}`))
 ];
 
+const baseColumnsExcludedFromModel = [
+  "CIRCUITO", "FID_SW", "COD_EQ_PROTEGE", "FID_VANO", "T_USUS_EQ_PROT", "CNT_VN_SW",
+  "DURACION", "UITI", "TOT_USUS", "COD_CAUSA", "DESC_CAUSA", "PORC_APORTE_VANO", "X1",
+  "Y1", "COD_APOYO_FIN", "FID_APOYO_FIN", "PROPIETARIO", "CLASE", "ELEMENTO", "NORMA",
+  "FID_TRAFO", "CODIGO", "CNT_USUS"
+];
+const climateFamiliesExcludedFromV3 = ["pres", "sp", "rh", "solar_rad"];
+
 const metricasClasificacion = [
   ["Accuracy", "0,822982"], ["Balanced Accuracy", "0,822985"],
   ["Precision Macro", "0,823322"], ["Recall Macro", "0,822985"],
@@ -475,7 +483,7 @@ const cronograma = [
             <thead>
               <tr>
                 <th>Modo</th>
-                <th>Variables</th>
+                <th>Nodos en el grafo</th>
                 <th>Descripción resumida</th>
               </tr>
             </thead>
@@ -703,24 +711,25 @@ const cronograma = [
             <p class="eyebrow">Componente 01</p>
             <h2 id="datos-title">Datos estructurados</h2>
             <p>
-              Trazabilidad desde la versión original de 164.896 registros y 173 columnas hasta el conjunto
-              depurado y las variables seleccionadas para modelado.
+              Trazabilidad desde el archivo enriquecido de 273 columnas, pasando por la versión v3 de 173
+              columnas, hasta las 85 columnas seleccionadas y los 84 predictores usados por el modelo.
             </p>
           </div>
 
           <div class="detail-stats">
             <article><strong>164.896</strong><span>filas originales</span></article>
-            <article><strong>173</strong><span>columnas originales</span></article>
-            <article><strong>30</strong><span>variables marcadas en el Excel</span></article>
-            <article><strong>84</strong><span>predictores efectivos</span></article>
+            <article><strong>273</strong><span>columnas después del enriquecimiento climático</span></article>
+            <article><strong>173</strong><span>columnas conservadas en la versión v3</span></article>
+            <article><strong>85</strong><span>columnas seleccionadas, incluido el objetivo</span></article>
+            <article><strong>84</strong><span>predictores finales del modelo</span></article>
           </div>
 
           <div class="detail-block">
             <h3>Resumen de los datos originales</h3>
             <p>
               Cada fila representa la relación entre una falla, el vano afectado, su equipo de protección,
-              atributos eléctricos y físicos, e información climática horaria. La vista resume las primeras y
-              últimas observaciones, conservando la lógica de la tabla original.
+              atributos eléctricos y físicos, e información climática horaria. El archivo enriquecido contiene
+              48 columnas base y nueve familias climáticas con 25 horas cada una: <code>48 + 9 × 25 = 273</code>.
             </p>
             <div class="table-wrap wide-table">
               <table>
@@ -738,8 +747,24 @@ const cronograma = [
           </div>
 
           <div class="detail-block">
+            <h3>Trazabilidad de columnas: 273 → 173 → 85 → 84</h3>
+            <div class="process-grid">
+              <article><strong>273 → 173</strong><p>Se retiran las 25 horas de <code>{climateFamiliesExcludedFromV3.join(", ")}</code>: cuatro familias completas, equivalentes a 100 columnas.</p></article>
+              <article><strong>173 → 85</strong><p>El Excel conserva 24 variables base, cinco familias climáticas y <code>UITI_VANO</code>. Además, cada familia se limita a los rezagos <code>0…11</code>.</p></article>
+              <article><strong>88 descartadas</strong><p>Se excluyen 23 columnas base con <code>SELECCIÓN = 0</code> y 65 columnas climáticas correspondientes a los rezagos <code>12…24</code>.</p></article>
+              <article><strong>85 → 84</strong><p><code>UITI_VANO</code> se separa como variable objetivo; las 84 columnas restantes forman la matriz predictora.</p></article>
+            </div>
+            <p><strong>Columnas base no usadas por el modelo:</strong></p>
+            <div class="feature-list">{baseColumnsExcludedFromModel.map((column) => <code>{column}</code>)}</div>
+          </div>
+
+          <div class="detail-block">
             <h3>Grafo original de variables</h3>
-            <p>La vista completa permite recorrer las dependencias físicas, eléctricas, espaciales y climáticas antes de aplicar la selección.</p>
+            <p>
+              El grafo no representa una etapa de reducción del dataset. Conserva todas las variables del catálogo:
+              48 variables base y las nueve familias climáticas, usando solo 12 horas por familia. Por eso contiene
+              <strong>156 nodos</strong>: <code>48 + 9 × 12</code>.
+            </p>
             <iframe class="graph-frame" src={grafoRedNivel2} title="Grafo original de la red Nivel 2"></iframe>
           </div>
 
@@ -770,8 +795,10 @@ const cronograma = [
           <div class="detail-block">
             <h3>Variables seleccionadas</h3>
             <p>
-              El archivo <code>Variables_seleccion.xlsx</code> marca 30 entradas: una corresponde al objetivo,
-              24 son predictores base y cinco son familias climáticas que se expanden en 12 horas cada una.
+              El archivo <code>Variables_seleccion.xlsx</code> evalúa 57 entradas y marca 30: una corresponde al
+              objetivo, 24 son predictores base y cinco son familias climáticas que se expanden en 12 horas cada una.
+              Esto produce 85 columnas seleccionadas, incluyendo <code>UITI_VANO</code>, y 84 predictores después
+              de separar el objetivo.
             </p>
             <div class="table-wrap compact-table">
               <table><thead><tr><th>Variable</th><th>Descripción</th><th>Uso</th></tr></thead><tbody>

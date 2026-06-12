@@ -1,5 +1,5 @@
 {
-  "totalVariables": 108,
+  "totalVariables": 156,
   "ventanaClimaticaHoras": 12,
   "resumen": [
     {
@@ -7,12 +7,12 @@
       "descripcion": "Cada fila representa una falla y cada columna describe el evento, el vano, los activos, el entorno o el impacto."
     },
     {
-      "titulo": "108 variables en 6 modos",
-      "descripcion": "Las entradas se agrupan en evento, protección, topología, características del vano, activos y clima/riesgo."
+      "titulo": "156 nodos en el grafo completo",
+      "descripcion": "El grafo conserva las 48 variables base y representa las nueve familias climáticas en 12 horas cada una."
     },
     {
       "titulo": "12 ventanas temporales",
-      "descripcion": "Cinco familias climáticas capturan la acumulación de estrés ambiental en las 12 horas previas a la falla."
+      "descripcion": "Nueve familias climáticas capturan la acumulación de estrés ambiental en las 12 horas previas a la falla."
     }
   ],
   "modos": [
@@ -54,10 +54,10 @@
     {
       "id": "F",
       "nombre": "Entorno, riesgo y clima",
-      "cantidad": 62,
-      "descripcion": "Vegetación, rayos y 12 ventanas de precipitación, nubosidad, viento, ráfagas y temperatura.",
+      "cantidad": 110,
+      "descripcion": "Vegetación, rayos y nueve familias meteorológicas representadas en 12 horas para el grafo.",
       "variablesEstaticas": ["NR_T", "DDT"],
-      "familiasClimaticas": ["prep", "clouds", "wind_spd", "wind_gust_spd", "temp"]
+      "familiasClimaticas": ["prep", "temp", "wind_gust_spd", "wind_spd", "clouds", "pres", "sp", "rh", "solar_rad"]
     }
   ],
   "conexiones": [
