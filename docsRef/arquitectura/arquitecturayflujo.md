@@ -8,20 +8,20 @@ Este documento describe la arquitectura multi-agente y el flujo de información 
 
 El proceso integra datos estructurados (tabulares) y no estructurados (texto de normativas y bitácoras), culminando en la generación de evidencias:
 
-1. **Selección del Circuito o vano de interés:** El usuario selecciona un circuito o vano de interés.
-2. **Identificación de puntos de interés:** El sistema consulta el historial de la base de datos para recuperar todos los eventos asociados al mismo **vano** (o circuito) durante el año anterior a la falla, analizando fluctuaciones en los indicadores UiTI, SAIDI y SAIFI.
-3. **Traducción Semántica y diagnóstico preliminar agéntico-descriptivo:** El sistema toma los datos crudos y, utilizando la descripción de las variables estudiadas, sus modos, sus relaciones y las posibles causas predeterminadas en el documento @ContextoProyectoSimuladorCHEC.md, genera una descripción preliminar por cada punto de interés. Finalmente, construye un análisis a lo largo del tiempo sobre la evolución de los indicadores y sus causas.
+1. **Selección del circuito o vano de interés:** El usuario selecciona el activo que desea analizar.
+2. **Identificación de puntos de interés:** El sistema consulta la base tabular para recuperar los eventos asociados al mismo **vano** o circuito durante los 12 meses anteriores.
+3. **Traducción semántica y diagnóstico retrospectivo:** El sistema describe cada punto de interés usando el diccionario de variables, sus modos y relaciones definidos en `ContextoProyectoSimuladorCHEC.md`, y analiza la evolución de `UITI` y `UITI_VANO` a lo largo del tiempo.
 4. **Análisis Documental y Normativo (RAG):** En paralelo al paso 3, el sistema consulta un repositorio de documentos (PDFs, textos, docs). Revisa:
    - **Bitácoras de Intervenciones:** Extrae el registro de mantenimientos programados (ej. podas, reposiciones) e intervenciones de mitigación asociadas a la zona en el último año.
    - **Normativa de Sistemas de Potencia:** Extrae los lineamientos técnicos aplicables a la infraestructura afectada.
 5. **Diagnóstico Preliminar agéntico descriptivo mejorado (bítacoras, historial y normativa):** Se consolida el evento actual con el historial tabular y el registro documental para plantear hipótesis de fallos tempranas.
 6. **Inferencia del Modelo Predictivo:** Un modelo de IA predictiva procesa las variables tabulares del evento actual y entrega:
-   - La predicción matemática de los indicadores.
+   - La predicción matemática de `UITI_VANO`.
    - **Máscaras de relevancia (Feature Importance):** Valores de 0 a 1 indicando qué características tienen mayor peso estadístico.
 7. **Cotejo Analítico a Tres Vías (Razonamiento Cruzado):** El sistema realiza un cruce crítico y justifica las causas combinando los patrones históricos, las justificaciones de bitácoras/normas y las máscaras del modelo ML. Coteja diagnósticos en puntos 3, 5 y 6.
 8. **Identificación de Escenarios Guiados:** Basado en el cotejo, se presenta una lista filtrada de variables candidatas a intervenir, estrictamente guiadas y validadas por los hallazgos en las bitácoras y la norma.
 9. **Simulación "*What-If*":** El usuario modifica los valores de las variables sugeridas en la interfaz.
-10. **Reevaluación Predictiva:** El modelo predictivo procesa el nuevo escenario y proyecta los nuevos valores de UiTi, SAIDI y SAIFI.
+10. **Reevaluación Predictiva:** El modelo predictivo procesa el nuevo escenario y proyecta el nuevo valor de `UITI_VANO`.
 11. **Generación de Reporte de Evidencias:** El sistema compila y redacta automáticamente un informe técnico formal. Este documento expone el razonamiento cruzado, las pruebas estadísticas (máscaras y proyecciones) y las evidencias documentales (citas de bitácoras y normativas) que justifican tanto las causas del fallo como la viabilidad del escenario de intervención propuesto.
 
 ---
@@ -36,7 +36,7 @@ La arquitectura multimodelo utiliza agentes especializados con cargas cognitivas
 
 ### Agente 2: Analista Histórico Estructurado (Modelo *High/Reasoning*)
 - **Rol:** Analista Forense de Datos.
-- **Función:** Analiza el historial numérico del último año. Identifica estacionalidad y patrones de degradación en UiTi, SAIDI y SAIFI.
+- **Función:** Analiza el historial numérico del último año. Identifica estacionalidad y patrones de degradación en `UITI` y `UITI_VANO`.
 
 ### Agente 3: Analista Documental y RAG (Modelo *High/Context-Heavy*)
 - **Rol:** Especialista en Normativa y Operaciones.
@@ -101,7 +101,7 @@ graph TD
     
     %% Flujo Histórico y Documental
     A2 -->|3a. Consulta 12 Meses| DB
-    DB -->|Historial SAIDI/SAIFI/UiTi| A2
+    DB -->|Historial UITI y UITI_VANO| A2
     
     A3 -->|3b. Búsqueda Textos| DocStore
     DocStore -->|Normativa y Bitácoras| A3
@@ -121,7 +121,7 @@ graph TD
     %% Ciclo de Simulación y Reporte
     User -->|7. Modifica Valores (What-If)| A5
     A5 -->|Nuevo Escenario| MP
-    MP -->|Retorna Nuevos Indicadores| A5
+    MP -->|Retorna Nuevo UITI_VANO| A5
     
     A4 -->|Síntesis Causal| A6
     A5 -->|Resultados de Simulación| A6
